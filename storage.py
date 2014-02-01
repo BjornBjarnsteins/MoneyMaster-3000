@@ -2,33 +2,33 @@
 # -*- coding: utf-8 -*-
 # Module sem sér um geymslu lána, sparnaðar, og mánaðarlegs sparnaðar
 
-"""
+
 # Klasi fyrir lán
-class Loan:
-	# Notkun: l = Loan(name, amount, interest, pay)
-	# Fyrir:  amount, interest og pay eru tölur (interest er á brotaformi
-	# 	  EKKI á prósentuformi, þ.e. 0.05 í stað 5%), name er strengur
-	# Eftir:  l er lán með nafnið name, höfuðstól amount, 
-	#	  vexti interest og mánaðarlega innborgun pay
-	def __init__(self, name, amount, interest, pay):
-		self.amount = amount
-		self.interest = interest
-		self.name = name
-		self.pay = pay
-
-	# Notkun: print(l)
-	# Fyrir:  l er lán
-	# Eftir:  lánið er prentað á skjáinn
-	def __str__(self):
-		return "Lán: %s Höfuðstóll: %d Vextir: %f Mánaðarleg innborgun: %d" % (self.name, self.amount, self.interest, self.pay)
-
-	# Notkun: l.changePay(newPay)
-	# Fyrir:  newPay er tala
-	# Eftir:  l.pay = newPay
-	def changePay(newPay):
-		self.pay = newPay
-
-"""
+#class Loan:
+#	# Notkun: l = Loan(name, amount, interest, pay)
+#	# Fyrir:  amount, interest og pay eru tölur (interest er á brotaformi
+#	# 	  EKKI á prósentuformi, þ.e. 0.05 í stað 5%), name er strengur
+#	# Eftir:  l er lán með nafnið name, höfuðstól amount, 
+#	#	  vexti interest og mánaðarlega innborgun pay
+#	def __init__(self, name, amount, interest, pay):
+#		self.amount = amount
+#		self.interest = interest
+#		self.name = name
+#		self.pay = pay
+#
+#	# Notkun: print(l)
+#	# Fyrir:  l er lán
+#	# Eftir:  lánið er prentað á skjáinn
+#	def __str__(self):
+#		return "Lán: %s Höfuðstóll: %d Vextir: %f Mánaðarleg innborgun: %d" % (self.name, self.amount, self.interest, self.pay)
+#
+#	# Notkun: l.changePay(newPay)
+#	# Fyrir:  newPay er tala
+#	# Eftir:  l.pay = newPay
+#	def changePay(newPay):
+#		self.pay = newPay
+#
+#
 
 
 # Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
