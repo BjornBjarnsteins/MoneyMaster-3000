@@ -4,9 +4,9 @@
 
 # Klasi fyrir lán
 class Loan:
-	# Notkun: l = Loan(amount, interest)
+	# Notkun: l = Loan(name, amount, interest, pay)
 	# Fyrir:  amount, interest og pay eru tölur (interest er á brotaformi
-	# EKKI á prósentuformi, þ.e. 0.05 í stað 5%), name er strengur
+	# 	  EKKI á prósentuformi, þ.e. 0.05 í stað 5%), name er strengur
 	# Eftir:  l er lán með nafnið name, höfuðstól amount, 
 	#	  vexti interest og mánaðarlega innborgun pay
 	def __init__(self, name, amount, interest, pay):
@@ -23,7 +23,23 @@ class Loan:
 
 # Klasi fyrir sparnaðarreikninga
 class SavingsAcct:
-	def __init__(self, name, amount, interest, pay)
+	# Notkun: s = SavingsAcct(name, amount, interest, pay)
+	# Fyrir:  amount, interest og pay eru tölur (interest er á brotaformi
+	# 	  EKKI á prósentuformi, þ.e. 0.05 í stað 5%), name er strengur
+	# Eftir:  s er sparnaðarreikningur/bók með nafnið name, höfuðstól amount, 
+	#	  vexti interest og mánaðarlega innborgun pay
+	def __init__(self, name, amount, interest, pay):
+		self.amount = amount
+		self.interest = interest
+		self.name = name
+		self.pay = pay
+
+	# Notkun: print(s)
+	# Fyrir:  s er sparnaðarreikningur
+	# Eftir:  reikningurinn er prentaður á skjáinn
+	def __str__(self):
+		return "Reikningur: %s Inneign: %d Vextir: %f Mánaðarlegur sparnaður: %d" % (self.name, self.amount, self.interest, self.pay)
+		
 
 # Notkun: storeLoan(l)
 # Fyrir:  l er lán
