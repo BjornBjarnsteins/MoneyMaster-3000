@@ -48,35 +48,45 @@ class Loan:
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment eru ráðstöfunartekjur, heil tala >= 0
-	# Eftir:  p er array sem sýnir þróun lánsins m.v. að aukalega sé greitt
-	#		  payment krónur inn á reikninginn
+	# Eftir:  p er array sem sýnir afborganir af láninu m.v. að aukalega séu greiddar
+	#		  payment krónur inn á reikninginn mánaðarlega.
 	def progression(self, payment):
 		principle = self.amount
 		months = self.m
-		index = pow(1.04, 1.0/12.0)
-		interest = pow(i, 1.0/12.0)
+		if self.dex:
+			index = pow(1.04, 1.0/12.0)
+		else:
+			index = 1
+		interest = pow(1+(self.interest/100.0), 1.0/12.0)
 		array = []
-		for i in range(0,m):
-			fee = int(round((1.0*principle)/(months-i)))
-			array.append(fee)
+		i = 0
+		while principle > 0:
+			fee = (1.0*principle)/(months-i)
+			i += 1
 			principle -= fee
+			payment = min(payment,principle)
 			principle -= payment
+			array.append(fee+payment)
 			principle = principle*index
 			principle = principle*interest
+			
 		return array
 	
 	# Notkun: i = interestM(payment, months)
-	# Fyrir:  payment er heil tala >=0, months er heiltala >0.
+	# Fyrir:  payment er heil tala >=0, months er heiltala með 0<=months<=tímabil láns.
 	# Eftir:  i er heildarvextir í krónum á tímabilinu months, m.v. payment krónur aukalega í afborgun mánaðarlega.
 	def interestM(self, payment, months):
-		prog = self.progression(payment, months)
-		return sum(prog[0:months])-round(self.amount*((1.0*months)/self.m))
+		prog = self.progression(payment)
+		control = min(self.m,months)
+		m = min(len(prog),months)
+		return (sum(prog[0:m])-self.amount*((1.0*control)/self.m))
 		
 	# Notkun: i = totInterest(payment)
 	# Fyrir:  payment er heiltala >= 0
 	# Eftir:  i eru heildarvextir í krónum á öllu láninu.
 	def totInterest(self, payment):
-		return self.interestM(payment, self.m)
+		m = self.m
+		return self.interestM(payment, m)
 
 ### Fann ekki útúr github almennilega svo ég editaði bara, þarf að breyta restinni af kóðanum til að styðja þennan klasa!!
 
