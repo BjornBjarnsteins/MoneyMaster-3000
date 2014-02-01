@@ -2,29 +2,35 @@
 # -*- coding: utf-8 -*-
 # Module sem sér um geymslu lána, sparnaðar, og mánaðarlegs sparnaðar
 
+# Klasi fyrir lán
 class Loan:
 	# Notkun: l = Loan(amount, interest)
-	# Fyrir:  amount og interest eru tölur (interest er á brotaformi
+	# Fyrir:  amount, interest og pay eru tölur (interest er á brotaformi
 	# EKKI á prósentuformi, þ.e. 0.05 í stað 5%), name er strengur
-	# Eftir:  l er lán með nafnið name, höfuðstól amount og 
-	#	  vexti interest
-	def __init__(self, name, amount, interest):
+	# Eftir:  l er lán með nafnið name, höfuðstól amount, 
+	#	  vexti interest og mánaðarlega innborgun pay
+	def __init__(self, name, amount, interest, pay):
 		self.amount = amount
 		self.interest = interest
 		self.name = name
+		self.pay = pay
 
 	# Notkun: print(l)
 	# Fyrir:  l er lán
 	# Eftir:  lánið er prentað á skjáinn
 	def __str__(self):
-		return "Lán: %s Höfuðstóll: %d Vextir: %f" % (self.name, self.amount, self.interest)
+		return "Lán: %s Höfuðstóll: %d Vextir: %f Mánaðarleg innborgun: %d" % (self.name, self.amount, self.interest, self.pay)
+
+# Klasi fyrir sparnaðarreikninga
+class SavingsAcct:
+	def __init__(self, name, amount, interest, pay)
 
 # Notkun: storeLoan(l)
 # Fyrir:  l er lán
 # Eftir:  l hefur verið geymt í skránni 'loans.txt' á forminu 'name-amount-interest', eitt lán í línu
 def storeLoan(l):
 	storage = open('loans.txt', 'a')
-	storage.write('%s-%d-%f\n' % (l.name, l.amount, l.interest))
+	storage.write('%s-%d-%f-%d\n' % (l.name, l.amount, l.interest, l.pay))
 
 # Notkun: storeAllLoans(l)
 # Fyrir:  l er listi af lánum
@@ -45,7 +51,7 @@ def loadLoans():
 	loans = []
 	for line in open('loans.txt'):
 		args = line.split('-')
-		loans = loans + [Loan(args[0], int(args[1]), float(args[2]))]
+		loans = loans + [Loan(args[0], int(args[1]), float(args[2]), int(args[3])]
 	return loans
 
 if __name__=="__main__":
