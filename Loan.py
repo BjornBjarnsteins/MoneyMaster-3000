@@ -23,7 +23,7 @@ class Loan:
 		principle = self.amount
 		months = self.m
 		if self.dex:
-			index = pow(1.04, 1.0/12.0)
+			index = pow(1.0435, 1.0/12.0)
 		else:
 			index = 1
 		interest = pow(1+(self.interest/100.0), 1.0/12.0)
