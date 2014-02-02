@@ -44,6 +44,7 @@ class Loan:
 		while i<months:
 			pay.append(0)
 			debt.append(0)
+			i += 1
 			
 		return [pay,debt]
 	# Notkun: p = payProgression(payment,M)
