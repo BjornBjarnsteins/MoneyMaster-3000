@@ -42,17 +42,17 @@ class Loan:
 			principle = principle*interest
 			
 		return [pay,debt]
-	# Notkun: p = payProgression(payment)
-	# Fyrir:  payment er heiltala >= 0
-	# Eftir:  p er array sem sýnir þróun greiðslubyrðar yfir lánstímabilið
-	def payProgression(self,payment):
-		return progression(payment)[0]
+	# Notkun: p = payProgression(payment,M)
+	# Fyrir:  payment,M eru heiltölur >= 0
+	# Eftir:  p er array sem sýnir stöðu nú og þróun greiðslubyrðar yfir lánstímabilið fyrstu M Mánuðina
+	def payProgression(self,payment,M):
+		return self.progression(payment)[0][:M+1]
 	
-	# Notkun: p = debtProgression(payment)
-	# Fyrir:  payment er heiltala >= 0
-	# Eftir:  p er array sem sýnir þróun skuldar yfir lánstímabilið
-	def debtProgression(self,payment):
-		return progression(payment)[1]
+	# Notkun: p = debtProgression(payment,M)
+	# Fyrir:  payment,M eru heiltölur >= 0
+	# Eftir:  p er array sem sýnir stöðu nú og þróun skuldar yfir lánstímabilið fyrstu M Mánuðina
+	def debtProgression(self,payment,M):
+		return self.progression(payment)[1][:M+1]
 	
 	# Notkun: i = interestM(payment, months)
 	# Fyrir:  payment er heil tala >=0, months er heiltala með 0<=months<=tímabil láns.
