@@ -40,19 +40,29 @@ class Loan:
 			pay.append(fee+payment)
 			principle = principle*index
 			principle = principle*interest
+		
+		while i<months:
+			pay.append(0)
+			debt.append(0)
 			
 		return [pay,debt]
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltölur >= 0
 	# Eftir:  p er array sem sýnir stöðu nú og þróun greiðslubyrðar yfir lánstímabilið fyrstu M Mánuðina
 	def payProgression(self,payment,M):
-		return self.progression(payment)[0][:M+1]
+		pay = self.progression(payment)[0][:M+1]
+		while len(pay) < M+1:
+			pay.append(0)
+		return pay
 	
 	# Notkun: p = debtProgression(payment,M)
 	# Fyrir:  payment,M eru heiltölur >= 0
 	# Eftir:  p er array sem sýnir stöðu nú og þróun skuldar yfir lánstímabilið fyrstu M Mánuðina
 	def debtProgression(self,payment,M):
-		return self.progression(payment)[1][:M+1]
+		dept = self.progression(payment)[1][:M+1]
+		while len(debt) < M+1:
+			debt.append(0)
+		return pay
 	
 	# Notkun: i = interestM(payment, months)
 	# Fyrir:  payment er heil tala >=0, months er heiltala með 0<=months<=tímabil láns.
