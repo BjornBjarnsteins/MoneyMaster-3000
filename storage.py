@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding: cp1252 -*-
 # Module sem sér um geymslu lána, sparnaðar, og mánaðarlegs sparnaðar
 import Savings
 import Loan
