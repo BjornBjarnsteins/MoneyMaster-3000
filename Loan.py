@@ -30,9 +30,10 @@ class Loan:
 		pay = []
 		debt = []
 		i = 0
+		minFee = (1.0*principle)/months
 		while principle > 0:
 			debt.append(principle)
-			fee = (1.0*principle)/(months-i)
+			fee = max(minFee, (1.0*principle)/(months-i))
 			principle -= fee
 			if i<M:
 				payment = min(payment,principle)
@@ -70,7 +71,7 @@ class Loan:
 	# Fyrir:  payment er heiltala >= 0
 	# Eftir:  i eru heildarvextir í krónum á öllu láninu.
 	def totInterest(self, payment, M):
-		total = sum(self.progression(payment,M)[0])
+		total = sum(self.payProgression(payment,M))
 		return (total-self.amount)
 	
 	# Notkun: m = L.getLoanPeriod
