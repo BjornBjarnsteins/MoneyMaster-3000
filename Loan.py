@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding: cp1252 -*-
 # Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
@@ -13,7 +13,7 @@ class Loan:
 		self.m = months
 	
 	def __str__(self):
-		return "Lan: %s Hofudstoll: %d Arsvextir: %f Lengd(manudir): %f Verdtryggt: %s" % (self.name, self.amount, self.interest, self.m, str(self.dex))
+		return "Lán: %s Hofudstoll: %d Arsvextir: %f Lengd(manudir): %f Verdtryggt: %s" % (self.name, self.amount, self.interest, self.m, str(self.dex))
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tölur >= 0
