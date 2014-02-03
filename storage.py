@@ -159,7 +159,7 @@ def loadLoans():
 # Eftir:  s er geymdur í 'savings.txt' á forminu name-amount-interest-pay, einn reikningur í línu
 def storeSAcct(s):
 	storage = open('savings.txt', 'a')
-	storage.write('%s-%d-%f-%d-%s-%s\n' % (s.name, s.amount, s.interest, s.index, s.bound))
+	storage.write('%s-%d-%f-%d-%s-%d\n' % (s.name, s.amount, s.interest, s.index, s.bound))
 
 # Notkun: storeAllSAccts(s)
 # Fyrir:  s er listi af reikningum
@@ -175,7 +175,7 @@ def loadSAccts():
 	SAccts = []
 	for line in open('savings.txt'):
 		args = line.split('-')
-		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), int(args[3]), args[4]==1, args[5]==1)]
+		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), int(args[3]), args[4]==1, int(args[5]))]
 	return SAccts
 
 if __name__=="__main__":
