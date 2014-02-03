@@ -3,6 +3,7 @@
 # Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
 
 import locale
+import math
 locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
@@ -14,10 +15,11 @@ class Loan:
 		self.dex = index
 		self.amount = amount
 		self.m = months
+		self.baseFee = (amount*1.0)/months
 	
 	def __str__(self):
 		amount = locale.currency(self.amount, grouping = True)
-		return "Lán: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, str(self.dex))
+		return "Lan: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, str(self.dex))
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tölur >= 0
@@ -27,24 +29,23 @@ class Loan:
 		principle = self.amount
 		months = self.m
 		if self.dex:
-			index = pow(1.0435, 1.0/12.0)
+			index = 0.0435/12.0
 		else:
 			index = 1
-		interest = pow(1+(self.interest/100.0), 1.0/12.0)
+		interest =(self.interest/100.0)/12.0
 		pay = []
-		debt = []
+		debt = [self.amount]
 		i = 0
 		while principle > 0:
-			fee = (1.0*principle)/(months-i)
-			principle -= fee
+			intPay = (principle*index)*interest
+			fee = min(self.baseFee, principle)+intPay
+			principle -= self.baseFee
 			if i<M:
-				payment = min(payment,principle)
+				payment = min(payment,principle-self.baseFee)
 			else:
 				payment = 0
 			principle -= payment
-			pay.append(fee+payment)
-			principle = principle*index
-			principle = principle*interest
+			pay.append(round(fee+payment))
 			debt.append(principle)
 			i += 1
 			
