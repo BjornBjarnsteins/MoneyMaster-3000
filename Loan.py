@@ -43,37 +43,26 @@ class Loan:
 			principle = principle*index
 			principle = principle*interest
 			i += 1
-		
-		while i<months:
-			pay.append(0)
-			debt.append(0)
-			i += 1
 			
 		return [pay,debt]
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltölur >= 0
 	# Eftir:  p er array sem sýnir stöðu nú og þróun greiðslubyrðar yfir lánstímabilið fyrstu M Mánuðina
 	def payProgression(self,payment,M):
-		pay = self.progression(payment,M)[0][:M+1]
-		while len(pay) < M+1:
-			pay.append(0)
-		return pay
+		return self.progression(payment,M)[0]
 	
 	# Notkun: p = debtProgression(payment,M)
 	# Fyrir:  payment,M eru heiltölur >= 0
 	# Eftir:  p er array sem sýnir stöðu nú og þróun skuldar yfir lánstímabilið fyrstu M Mánuðina
 	def debtProgression(self,payment,M):
-		debt = self.progression(payment,M)[1][:M+1]
-		while len(debt) < M+1:
-			debt.append(0)
-		return debt
+		return self.progression(payment,M)[1]
 	
 	# Notkun: i = interestM(payment, months)
-	# Fyrir:  payment er heil tala >=0, months er heiltala með 0<=months<=tímabil láns.
-	# Eftir:  i er heildar umframgreiðsla(þ.m.t. vextir) í krónum á tímabilinu months, m.v. payment krónur aukalega í afborgun mánaðarlega.
-	def interestM(self, payment, months):
-		prog = self.payProgression(payment,self.m)
-		control = min(self.m,months)
+	# Fyrir:  payment er heil tala >=0, months er heil tala >=0, M er heil tala >=0
+	# Eftir:  i er heildar umframgreiðsla(þ.m.t. vextir) í krónum á tímabilinu M, m.v. payment krónur aukalega í afborgun mánaðarlega fyrstu months mánuðina.
+	def interestM(self, payment, months, M):
+		prog = self.payProgression(payment,months)
+		control = min(self.m,M)
 		m = min(len(prog),months)
 		return (sum(prog[0:m])-self.amount*((1.0*control)/self.m))
 		
