@@ -1,8 +1,8 @@
 
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 import math
-import locale
-locale.setlocale( locale.LC_ALL, 'icelandic')
+#import locale
+#locale.setlocale( locale.LC_ALL, 'icelandic')
 
 class Savings:
     
