@@ -30,9 +30,7 @@ class Loan:
 		pay = []
 		debt = []
 		i = 0
-		#minFee = (1.0*principle)/months
 		while principle > 0:
-			#fee = max(minFee, (1.0*principle)/(months-i))
 			fee = (1.0*principle)/(months-i)
 			principle -= fee
 			if i<M:
