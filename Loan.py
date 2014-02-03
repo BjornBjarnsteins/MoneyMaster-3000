@@ -83,3 +83,9 @@ class Loan:
 	def totInterest(self, payment, M):
 		total = sum(self.progression(payment,M)[0])
 		return (total-self.amount)
+	
+	# Notkun: m = L.getLoanPeriod
+	# Fyrir:  L er hlutur af taginu Loan
+	# Eftir:  m er lánstímabil L í mánuðum
+	def getLoanPeriod(self):
+		return self.m
