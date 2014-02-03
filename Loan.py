@@ -1,6 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: cp1252 -*-
 # Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
+
+import locale
+locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
@@ -13,7 +16,8 @@ class Loan:
 		self.m = months
 	
 	def __str__(self):
-		return "Lán: %s Hofudstoll: %d Arsvextir: %f Lengd(manudir): %f Verdtryggt: %s" % (self.name, self.amount, self.interest, self.m, str(self.dex))
+		amount = locale.currency(self.amount, grouping = True)
+		return "Lán: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, str(self.dex))
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tölur >= 0
