@@ -30,10 +30,10 @@ class Loan:
 		pay = []
 		debt = []
 		i = 0
-		minFee = (1.0*principle)/months
+		#minFee = (1.0*principle)/months
 		while principle > 0:
-			debt.append(principle)
-			fee = max(minFee, (1.0*principle)/(months-i))
+			#fee = max(minFee, (1.0*principle)/(months-i))
+			fee = (1.0*principle)/(months-i)
 			principle -= fee
 			if i<M:
 				payment = min(payment,principle)
@@ -43,9 +43,11 @@ class Loan:
 			pay.append(fee+payment)
 			principle = principle*index
 			principle = principle*interest
+			debt.append(principle)
 			i += 1
 			
 		return [pay,debt]
+	
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltölur >= 0
 	# Eftir:  p er array sem sýnir stöðu nú og þróun greiðslubyrðar yfir lánstímabilið fyrstu M Mánuðina
@@ -61,21 +63,11 @@ class Loan:
 	# Notkun: i = interestM(payment, months)
 	# Fyrir:  payment er heil tala >=0, months er heil tala >=0, M er heil tala >=0
 	# Eftir:  i er heildar umframgreiðsla(þ.m.t. vextir) í krónum á tímabilinu M, m.v. payment krónur aukalega í afborgun mánaðarlega fyrstu months mánuðina.
-	def interestM(self, payment, months, M):
-		prog = self.payProgression(payment,months)
-		control = min(self.m,M)
-		m = min(len(prog),months)
-		return (sum(prog[0:m])-self.amount*((1.0*control)/self.m))
+	# def interestM(self, payment, months, M):
 		
-	# Notkun: i = totInterest(payment)
-	# Fyrir:  payment er heiltala >= 0
-	# Eftir:  i eru heildarvextir í krónum á öllu láninu.
+	# Notkun: i = totInterest(payment, M)
+	# Fyrir:  payment er heiltala >= 0, M er heiltala >=0
+	# Eftir:  i eru heildarvextir í krónum á öllu láninu m.v. payment aukaframlag fyrstu M mánuðina.
 	def totInterest(self, payment, M):
 		total = sum(self.payProgression(payment,M))
 		return (total-self.amount)
-	
-	# Notkun: m = L.getLoanPeriod
-	# Fyrir:  L er hlutur af taginu Loan
-	# Eftir:  m er lánstímabil L í mánuðum
-	def getLoanPeriod(self):
-		return self.m
