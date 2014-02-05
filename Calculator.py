@@ -5,13 +5,12 @@
 from Savings import *
 from Loan import *
 def compareLoans(L1, L2, payment, M):
-    M = min(M,L1.m,L2.m)
-    A = L1.interestM(payment,M)
-    B = L2.interestM(payment,M)
+    A = L1.totInterest(0,0)-L1.totInterest(payment,M)
+    B = L2.totInterest(0,0)-L2.totInterest(payment,M)
     if A > B:
-        return L2
-    else:
         return L1
+    else:
+        return L2
 
 #Notkun: s = compareSavings(s1,s2,monthly,M)
 #Fyrir: s1,s2 eru Savings hlutir, monthly>=0 rauntala, M>=0 heiltala, s1 og s2 hafa sömu upphafsinnistæğu
@@ -68,6 +67,21 @@ def compareLS(l,s, monthly, m):
         return s
     else:
         return l
+		
+#def compareLS2(l,s,monthly,m):
+#	M = len(l.payProgression(monthly,m))
+#	m = min(m,M)
+#	#profit af şví ağ greiğa inn á lán:
+#	profit1 = l.totInterest(0,0)-l.totInterest(monthly,m)
+#	
+#	#profit af şví ağ greiğa inn á sparnağ:
+#	profit2 = s.progression(monthly,m,M)[-1] - s.progression(0,0,M)[-1] - (monthly*m)
+#	
+#	if profit1 > profit2:
+#		return l
+#	else:
+#		return s
+	
 
     
     
