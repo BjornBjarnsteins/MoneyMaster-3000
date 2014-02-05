@@ -42,29 +42,47 @@ def compareAllSavings(s, monthly, m, M):
 #Fyrir: l er Loan hlutur, s er Savings hlutur, monthly>=0 rauntala, M>=0 heiltala
 #Eftir: t = l ef hagstæðara er fyrir notanda að greiða upphæð monthly inn á l í M mánuði, t = s annars
 #       'hagstæðara' telst vera meiri eignir að M mánuðum loknum.
-def compareLS(l,s, monthly, m, M):
-    m = min(m,M)
-    #gróði af því að greiða inn á lán:
-    profit1 = l.totInterest(0,0)-l.totInterest(monthly,m)
-
-    t = len(l.payProgression(monthly, m))
-    if(t<m):
-        extraprofit = sum(s.progression(0, 0, t)[t])+sum(s.progression(monthly+l.baseFee,m-t,m-t)[m-t])+sum(s.progression(l.baseFee,M-m+t,M-m+t)[M-m+t])-3*s.a
-    elif(t < M):
-        extraprofit = sum(s.progression(0, 0, t)[t])+sum(s.progression(l.baseFee,M-t,M-t)[M-t])-2*s.a
-    else:
-        extraprofit = sum(s.progression(0, 0, t)[t])-s.a
-
-    profit1 += extraprofit
-    profit1 -= monthly*m
+def compareLS(l,s, monthly, m):
+	M = len(l.payProgression(0,0))
+	m = min(m, M)
+	#gróði af því að greiða inn á lán:
+	profit1 = l.totInterest(0,0)-l.totInterest(monthly,m)
+	print profit1
 	
-    #gróði af því að greiða inn á sparnað:
-    profit2 = sum(s.progression(monthly,m,M)[M]) - sum(s.progression(0,0,M)[M]) - (monthly*m)
+	t = len(l.payProgression(monthly, m))
+	#Endurskrifun
+	mLeft = max(m-t, 0)
+	print mLeft
+	MLeft = M-t-mLeft
+	print MLeft
+	extraprofit = mLeft*(monthly+l.baseFee) + MLeft*l.baseFee
+	print extraprofit
+	#extraprofit = sum(s.progression(monthly+l.baseFee,mLeft,mLeft)[mLeft]) - sum(s.progression(0,0,mLeft)[mLeft]) #vextir yfir tímann sem við erum að borga aukagreiðsluna og grunngreiðslu láns inn á sparnað
+	#print extraprofit
+	#extraprofit += sum(s.progression(l.baseFee,MLeft,MLeft)[MLeft]) - sum(s.progression(0,0,MLeft)[MLeft]) #vextir yfir tímann sem við erum að borga grunngreiðslu láns inn á sparnað
+	#print extraprofit
 	
-    if profit1 > profit2:
-    	return l
-    else:
-        return s
+	profit1 += extraprofit# - (monthly*m)
+	print profit1
+	
+	#if(t<m):
+	#    extraprofit = sum(s.progression(0, 0, t)[t])+sum(s.progression(monthly+l.baseFee,m-t,m-t)[m-t])+sum(s.progression(l.baseFee,M-m+t,M-m+t)[M-m+t])-3*s.a
+	#elif(t < M):
+	#    extraprofit = sum(s.progression(0, 0, t)[t])+sum(s.progression(l.baseFee,M-t,M-t)[M-t])-2*s.a
+	#else:
+	#    extraprofit = sum(s.progression(0, 0, t)[t])-s.a
+	#
+	#profit1 += extraprofit
+	#profit1 -= monthly*m
+	
+	#gróði af því að greiða inn á sparnað:
+	profit2 = sum(s.progression(monthly,m,M)[M]) - sum(s.progression(0,0,M)[M])# - (monthly*m)
+	print profit2
+	
+	if profit1 > profit2:
+		return l
+	else:
+		return s
 	
 
     
