@@ -139,6 +139,9 @@ class MainFrame(wx.Frame):
 
         
     def displaySparnadur(self,event):
+        #hreinsa fyrst það sem var í console á undan
+        cleanUpBottomPanel(self)
+        
         input1 = self.inputTxt1.GetValue()
         input2 = self.inputTxt2.GetValue()
         input3 = self.inputTxt3.GetValue()
@@ -161,9 +164,7 @@ class MainFrame(wx.Frame):
     def displayProgression(self,event):
         
         #hreinsum panel fyrst
-        for child in self.bottompanel.GetChildren():
-            if type(child) != wx._controls.StaticBitmap:
-                child.Destroy()
+        cleanUpBottomPanel(self)
         
         input1 = self.inputTxt1.GetValue()
         input2 = self.inputTxt2.GetValue()
@@ -194,11 +195,14 @@ class MainFrame(wx.Frame):
         #self.bottompanel.SetScrollbars(0,50,0,20)
         self.bottompanel.SetScrollRate(1,1)
         self.bottompanel.SetVirtualSize(someInfo.GetVirtualSize())
-           
-        
     
     def Quit(self,event):
         self.Close()
+
+def cleanUpBottomPanel(self):
+    for child in self.bottompanel.GetChildren():
+        if type(child) != wx._controls.StaticBitmap:
+            child.Destroy()
 
 app = wx.App(0)
 win = MainFrame(None, -1, "Moneys", (50, 50), (800, 700))
