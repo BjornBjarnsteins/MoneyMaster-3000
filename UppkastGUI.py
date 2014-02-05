@@ -152,8 +152,12 @@ class MainFrame(wx.Frame):
         input5 = self.inputTxt5.GetValue()
         
         extraheight = "\n"
-        spar = Savings.Savings(input1,float(input2),float(input3),input4,float(input5))
-        someInfo = wx.StaticText(self.bottompanel, -1, str(spar)+extraheight,(15,10))
+        spar = Savings.Savings(input1,float(input2),float(input3),input4,float(input5)) 
+        #юaр koma encoding villur н python shell
+        #kalla юб б fall sem ignorar non-ascii stafi
+        enc_str = str(spar).encode("ascii","ignore")
+        
+        someInfo = wx.StaticText(self.bottompanel, -1,enc_str+extraheight,(15,10))
         font = wx.Font(16, wx.SCRIPT, wx.NORMAL, wx.NORMAL,underline=False)
         someInfo.SetFont(font)
         someInfo.SetForegroundColour("blue")
