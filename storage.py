@@ -45,7 +45,7 @@ def loadLoans():
 
 # Notkun: storeSAcct(s)
 # Fyrir:  s er reikningur
-# Eftir:  s er geymdur í 'savings.txt' á forminu name-amount-interest-pay, einn reikningur í línu
+# Eftir:  s er geymdur í 'savings.txt' á forminu name-amount-interest-pay-index-bound, einn reikningur í línu
 def storeSAcct(s):
 	storage = open('savings.txt', 'a')
 	storage.write('%s-%d-%f-%d-%s-%d\n' % (s.name, s.amount, s.interest, s.index, s.bound))
@@ -75,3 +75,6 @@ if __name__=="__main__":
 	loans2 = loadLoans()
 	print(loans2[0])
 	print(loans2[1])
+
+	s = loadSAccts()
+	print s[0]
