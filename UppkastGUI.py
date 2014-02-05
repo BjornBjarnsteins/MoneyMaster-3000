@@ -6,7 +6,6 @@ import storage
 import Savings  
 import locale
 locale.setlocale( locale.LC_ALL, 'icelandic')
-import wx.lib.inspection
 import wx.lib.scrolledpanel as scrolled
 
 #Ath, það þarf að downloada wxPython til að geta keyrt forritið,
@@ -138,8 +137,6 @@ class MainFrame(wx.Frame):
         
 
 
-        wx.lib.inspection.InspectionTool().Show()
-        
         
     def displaySparnadur(self,event):
         input1 = self.inputTxt1.GetValue()
@@ -194,7 +191,7 @@ class MainFrame(wx.Frame):
         font = wx.Font(16, wx.SCRIPT, wx.NORMAL, wx.NORMAL,underline=False)
         someInfo.SetFont(font)
         someInfo.SetForegroundColour("blue")
-         #self.bottompanel.SetScrollbars(0,50,0,20)
+        #self.bottompanel.SetScrollbars(0,50,0,20)
         self.bottompanel.SetScrollRate(1,1)
         self.bottompanel.SetVirtualSize(someInfo.GetVirtualSize())
            
