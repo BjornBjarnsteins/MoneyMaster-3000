@@ -43,48 +43,31 @@ def compareAllSavings(s, monthly, m, M):
 #Eftir: t = l ef hagstæðara er fyrir notanda að greiða upphæð monthly inn á l í M mánuði, t = s annars
 #       'hagstæðara' telst vera meiri eignir að M mánuðum loknum.
 def compareLS(l,s, monthly, m):
-	M = len(l.payProgression(0,0))
-	m = min(m, M)
-	#gróði af því að greiða inn á lán:
-	profit1 = l.totInterest(0,0)-l.totInterest(monthly,m)
-	print profit1
-	
-	t = len(l.payProgression(monthly, m))
-	#Endurskrifun
-	mLeft = max(m-t, 0)
-	print mLeft
-	MLeft = M-t-mLeft
-	print MLeft
-	extraprofit = mLeft*(monthly+l.baseFee) + MLeft*l.baseFee
-	print extraprofit
-	#extraprofit = sum(s.progression(monthly+l.baseFee,mLeft,mLeft)[mLeft]) - sum(s.progression(0,0,mLeft)[mLeft]) #vextir yfir tímann sem við erum að borga aukagreiðsluna og grunngreiðslu láns inn á sparnað
-	#print extraprofit
-	#extraprofit += sum(s.progression(l.baseFee,MLeft,MLeft)[MLeft]) - sum(s.progression(0,0,MLeft)[MLeft]) #vextir yfir tímann sem við erum að borga grunngreiðslu láns inn á sparnað
-	#print extraprofit
-	
-	profit1 += extraprofit# - (monthly*m)
-	print profit1
-	
-	#if(t<m):
-	#    extraprofit = sum(s.progression(0, 0, t)[t])+sum(s.progression(monthly+l.baseFee,m-t,m-t)[m-t])+sum(s.progression(l.baseFee,M-m+t,M-m+t)[M-m+t])-3*s.a
-	#elif(t < M):
-	#    extraprofit = sum(s.progression(0, 0, t)[t])+sum(s.progression(l.baseFee,M-t,M-t)[M-t])-2*s.a
-	#else:
-	#    extraprofit = sum(s.progression(0, 0, t)[t])-s.a
-	#
-	#profit1 += extraprofit
-	#profit1 -= monthly*m
-	
-	#gróði af því að greiða inn á sparnað:
-	profit2 = sum(s.progression(monthly,m,M)[M]) - sum(s.progression(0,0,M)[M])# - (monthly*m)
-	print profit2
-	
-	if profit1 > profit2:
-		return l
-	else:
-		return s
-	
 
+    M = l.m
+    m = min(m, M)
+    #Case 1: Borgum inn á sparnað en ekki lán.
+    #Tap1 = vextirnir sem safnast upp yfir lánstímann.
+    #Grodi1 = vextirnir af mánaðarlega framlaginu sem safnast upp a tímabilinu
+    tap1 = -l.totInterest(0,0) #jákvæð tala
+    grodi1 = sum(s.progression(monthly, m, M)[M])-sum(s.progression(0,0,M)[M])-monthly*m
+    netto1 = grodi1+tap1
+
+    #Case 2: Borgum inn a lán en ekki sparnað.
+    #Tap2 = vextirnir sem safnast upp yfir lánstímann.
+    #Gróði2 = Ágóði af því að borga mánaðarlegt framlag inn a sparnaðarreikning af því loknu að borga niður lán
+    #       + ágóði af því borga hefðbundna afborgun af láni inn a sparnaðarreikning uns lánstíma líkur.
+    T = M-len(l.payProgression(monthly,m))
+    t = max(m-T,0)
+    tap2 = -l.totInterest(monthly,m)
+    grodi2 = sum(s.progression(monthly, t, T)[T])-sum(s.progression(0,0,T)[T])-monthly*t
+    grodi2 += sum(s.progression(l.baseFee, T, T)[T])-sum(s.progression(0,0,T)[T])-l.baseFee*T
+    netto2 = grodi2+tap2
+
+    if(netto1 > netto2):
+        return s
+    else:
+        return l
     
     
     
