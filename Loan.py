@@ -38,14 +38,14 @@ class Loan:
 		i = 0
 		while principle > 0:
 			intPay = (principle*index)*interest
-			fee = min(self.baseFee, principle)+intPay
-			principle -= self.baseFee
+			fee = min(self.baseFee, principle)
+			principle -= fee
 			if i<M:
-				payment = min(payment,principle-self.baseFee)
+				payment = min(payment,principle)
 			else:
 				payment = 0
 			principle -= payment
-			pay.append(round(fee+payment))
+			pay.append(round(fee+payment+intPay))
 			debt.append(principle)
 			i += 1
 			
