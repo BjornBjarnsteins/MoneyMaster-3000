@@ -4,6 +4,13 @@ import Loan
 import Savings
 import storage
 
+# Eftir:  L er lán sem heitir Name, með höfuðstól Amount, Interest ársvexti, Months tíma eftir og Index segir til um verðtryggingu.
+
+a = storage.loadLoans()
+dictLoans = {}
+for i in a:
+    dictLoans[str(i.name)]=str(i)
+
 import gettext
 class TabPanel(wx.Panel):
     def __init__(self, parent):
@@ -24,6 +31,8 @@ class TabPanel(wx.Panel):
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60)) 
         self.combo_box_2.Bind(wx.EVT_COMBOBOX, self.reikna)
+        self.combo_box_2.Bind(wx.EVT_TEXT,self.values)
+
         self.Fit()
 
         self.SetSizer(sizer)
@@ -31,6 +40,13 @@ class TabPanel(wx.Panel):
     
     def reikna(self,event):
         print "ups"
+    def values(self,event):
+        someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
+                                 -1,str(dictLoans[self.combo_box_2.GetValue()]),pos=(15,10),size=(800,200))
+        someInfo.SetFont(wx.Font(14, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        someInfo.SetForegroundColour("blue")
+        self.GetParent().GetParent().GetParent().bottomwindow.SetScrollRate(10,10)
+        self.GetParent().GetParent().GetParent().bottomwindow.SetVirtualSize(someInfo.GetVirtualSize())
         
 def populateComboBox(self):
     a = storage.loadLoans()

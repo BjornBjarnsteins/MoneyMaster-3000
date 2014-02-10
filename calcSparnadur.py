@@ -5,6 +5,11 @@ import Savings
 import storage
 
 import gettext
+a = storage.loadSAccts()
+dictLoans = {}
+for i in a:
+    dictLoans[str(i.n)]=str(i)
+    
 class TabPanel(wx.Panel):
     def __init__(self, parent):
         
@@ -25,6 +30,7 @@ class TabPanel(wx.Panel):
         self.combo_box_1.SetSelection(0)
         
         self.combo_box_1.Bind(wx.EVT_COMBOBOX, self.reikna)
+        self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
         self.Fit()
 
         self.SetSizer(sizer)
@@ -32,7 +38,15 @@ class TabPanel(wx.Panel):
     
     def reikna(self,event):
         print "ups"
-    
+        
+    def values(self,event):
+        someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
+                                 -1,dictLoans[self.combo_box_1.GetValue()],pos=(15,10),size=(800,200))
+        someInfo.SetFont(wx.Font(14, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        someInfo.SetForegroundColour("red")
+        self.GetParent().GetParent().GetParent().bottomwindow.SetScrollRate(10,10)
+        self.GetParent().GetParent().GetParent().bottomwindow.SetVirtualSize(someInfo.GetVirtualSize())      
+        
 def populateComboBox(self):
     a = storage.loadSAccts()
     k = 1
