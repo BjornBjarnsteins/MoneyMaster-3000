@@ -4,7 +4,7 @@
 
 import locale
 import math
-locale.setlocale( locale.LC_ALL, 'is_IS.UTF-8')
+locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
@@ -20,11 +20,10 @@ class Loan:
 	def __str__(self):
 		amount = locale.currency(self.amount, grouping = True)
 		if self.dex:
-			vtr = 'Ja'
+			vtr = 'Já'
 		else:
 			vtr = 'Nei'
-		print vtr
-		return "Lan: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
+		return "Lán: %s \nHöfuðstóll: %s \nÁrsvextir: %0.2f \nLengd(mánuðir): %d \nVerðtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tÃ¶lur >= 0
@@ -36,13 +35,13 @@ class Loan:
 		if self.dex:
 			index = 0.0435/12.0
 		else:
-			index = 1
+			index = 0
 		interest =(self.interest/100.0)/12.0
 		pay = []
 		debt = [self.amount]
 		i = 0
 		while principle > 0:
-			intPay = (principle*index)*interest
+			intPay = principle*((1+index)*(1+interest)-1)
 			fee = min(self.baseFee, principle)
 			principle -= fee
 			if i<M:
@@ -55,6 +54,15 @@ class Loan:
 			i += 1
 			
 		return [pay,debt]
+		
+	def printProgression(self, payment, M):
+		prog = self.progression(payment, M)
+		amount = locale.currency(self.amount, grouping = True)
+		print 'Höfuðstóll í upphafi: '+amount
+		for i in range(0,len(prog[0])):
+			pay = locale.currency(prog[0][i], grouping = True)
+			debt = locale.currency(prog[1][i], grouping = True)
+			print 'Mánuður %d: \n Afborgun: %s Höfuðstóll: %s' %(i+1, pay, debt)
 	
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
