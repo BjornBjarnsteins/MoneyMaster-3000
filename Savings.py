@@ -29,7 +29,7 @@ class Savings:
     def __str__(self):
 
         if self.dex:
-            indexed = 'Já'
+            indexed = 'Ja'
         else:
             indexed = 'Nei'
 
@@ -41,18 +41,18 @@ class Savings:
             rest = self.b-years*12
             months = int(math.floor(rest))
             days = int((rest-months)*30)
-            bound = '%d ár, %d mánuðir, %d dagar' %(years, months, days)
+            bound = '%d ar, %d manuðir, %d dagar' %(years, months, days)
         elif(math.floor(self.b) != 0):
             months = int(math.floor(self.b))
             days = int((self.b-months)*30)
-            bound = '%d mánuðir, %d dagar' %(months, days)
+            bound = '%d manudir, %d dagar' %(months, days)
         else: 
             days = int(self.b*30)
             bound = str(days)+' dagar'
         
         amount = locale.currency(self.a, grouping = True)
         
-        return 'Sparnaðarreikningur: %s \nStaða: %s \nÁrsvextir: %0.2f%s \nVerðtrygging: %s \nBinditími: %s' %(self.n, amount, interest,'%', indexed, bound)
+        return 'Sparnadarreikningur: %s \nStada: %s \nArsvextir: %0.2f%s \nVerdtrygging: %s \nBinditimi: %s' %(self.n, amount, interest,'%', indexed, bound)
 
     #Notkun: data = progression(monthly,M)
     #Fyrir: monthly>=0 rauntala, M>0 heiltala
@@ -60,7 +60,7 @@ class Savings:
     #       þar sem upphæð monthly hefur verið lögð inn hvern mánuð.
     def progression(self, monthly, m, M):
 
-        total = self.a
+        total = self.a  
         prog = [total] #setjum inn upphafsstöðu reiknings í fyrsta sætið
         for i in range(0,m): #næstu m mánuðina leggjum við upphæð monthly inn a reikninginn.
             total = (total+monthly)*(self.adjustedp)
@@ -107,11 +107,7 @@ class Savings:
 
         return m+n
         
+if __name__ == '__main__':
+    a = Savings("sigga",5,1.2,True,2)
 
-   
-
-
-    
-
-
-    
+    print a.b

@@ -1,77 +1,82 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
-# Module sem sÃ©r um geymslu lÃ¡na, sparnaÃ°ar, og mÃ¡naÃ°arlegs sparnaÃ°ar
+# -*- coding: cp1252 -*-
+# Module sem sér um geymslu lána, sparnağar, og mánağarlegs sparnağar
 import Savings
 import Loan
-
+import os.path
 
 #
 
 # Notkun: resetFile(filename)
-# Eftir:  SkrÃ¡in filename er tÃ³m 
+# Eftir:  Skráin filename er tóm 
 def resetFile(filename):
 	storage = open(filename, 'w')
 
 
-# FÃ¶ll til aÃ° geyma og nÃ¡ Ã­ lÃ¡n
+# Föll til ağ geyma og ná í lán
 
 # Notkun: storeLoan(l)
-# Fyrir:  l er lÃ¡n
-# Eftir:  l hefur veriÃ° geymt Ã­ skrÃ¡nni 'loans.txt' Ã¡ forminu 'name-amount-interest-months-index', eitt lÃ¡n Ã­ lÃ­nu
+# Fyrir:  l er lán
+# Eftir:  l hefur veriğ geymt í skránni 'loans.txt' á forminu 'name-amount-interest-months-index', eitt lán í línu
 def storeLoan(l):
 	storage = open('loans.txt', 'a')
 	storage.write('%s-%d-%f-%d-%s\n' % (l.name, l.amount, l.interest, l.m, l.dex)) 
 
 # Notkun: storeAllLoans(l)
-# Fyrir:  l er listi af lÃ¡num
-# Eftir:  'loans.txt' er tÃ¦md og Ã¶ll lÃ¡nin Ã­ l hafa veriÃ° sett Ã­ skrÃ¡na 'loans.txt'
+# Fyrir:  l er listi af lánum
+# Eftir:  'loans.txt' er tæmd og öll lánin í l hafa veriğ sett í skrána 'loans.txt'
 def storeAllLoans(l):
 	resetFile('loans.txt')
 	for n in range(0, len(l)):
 		storeLoan(l[n])
 
+# Notkun: appendAllLoans(l)
+# Fyrir:  l er listi af lánum
+# Eftir:  'loans.txt' er EKKI tæmd og öll lánin í l hafa veriğ sett í skrána 'loans.txt'
+def appendAllLoans(l):
+	for n in range(0, len(l)):
+		storeLoan(l[n])
 
 # Notkun: loans = loadLoans()
-# Eftir:  loans er listi af Ã¶llum geymdum lÃ¡num
+# Eftir:  loans er listi af öllum geymdum lánum
 def loadLoans():
 	loans = []
 	for line in open('loans.txt'):
 		args = line.split('-')
-		loans = loans + [Loan.Loan(args[0], int(args[1]), float(args[2]), int(args[3]), args[4]==1)]
+		loans = loans + [Loan.Loan(args[0], int(args[1]), float(args[2]), int(args[3]), args[4])]
 	return loans
 
 
-# FÃ¶ll til aÃ° geyma og nÃ¡ Ã­ reikninga
+# Föll til ağ geyma og ná í reikninga
 
 # Notkun: storeSAcct(s)
 # Fyrir:  s er reikningur
-# Eftir:  s er geymdur Ã­ 'savings.txt' Ã¡ forminu name-amount-interest-pay, einn reikningur Ã­ lÃ­nu
+# Eftir:  s er geymdur í 'savings.txt' á forminu name-amount-interest-pay, einn reikningur í línu
 def storeSAcct(s):
-	storage = open('savings.txt', 'a')
-	storage.write('%s-%d-%f-%d-%s-%d\n' % (s.name, s.amount, s.interest, s.index, s.bound))
+	if(os.path.isfile('savings.txt')):
+		storage = open('savings.txt', 'a')
+		storage.write('%s-%d-%f-%d-%s\n' % (s.n, s.a, s.p, s.dex, s.b))
 
 # Notkun: storeAllSAccts(s)
 # Fyrir:  s er listi af reikningum
-# Eftir:  SkrÃ¡in 'savings.txt' hefur veriÃ° tÃ¦md og allir reikningarnir Ã­ s settir Ã­ hana
+# Eftir:  Skráin 'savings.txt' hefur veriğ tæmd og allir reikningarnir í s settir í hana
 def storeAllSAccts(s):
-	resetFile('savings.txt', 'a')
-	for n in range(0, len(l)):
+	resetFile('savings.txt')
+	for n in range(0, len(s)):
 		storeSAcct(s[n])
 
 # Notkun: accts = loadSAccts()
-# Eftir:  accts inniheldur alla reikningana Ã­ 'savings.txt'
+# Eftir:  accts inniheldur alla reikningana í 'savings.txt'
 def loadSAccts():
 	SAccts = []
 	for line in open('savings.txt'):
 		args = line.split('-')
-		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), int(args[3]), args[4]==1, int(args[5]))]
+		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), int(args[3]), float(args[4]))]
 	return SAccts
 
 if __name__=="__main__":
-	l1 = Loan.Loan('bÃ­lalÃ¡n', 100000, 0.05, 5, 1)
-	l2 = Loan.Loan('hÃºsnÃ¦Ã°islÃ¡n', 10000000, 0.04, 10, 0)
-	loans = [l1, l2]
-	storeAllLoans(loans)
-	loans2 = loadLoans()
-	print(loans2[0])
-	print(loans2[1])
+	
+	a = loadLoans()
+	for i in a:
+		print i
+		
