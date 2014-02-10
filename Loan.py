@@ -35,7 +35,7 @@ class Loan:
 		if self.dex:
 			index = 0.0435/12.0
 		else:
-			index = 1
+			index = 0
 		interest =(self.interest/100.0)/12.0
 		pay = []
 		debt = [self.amount]
