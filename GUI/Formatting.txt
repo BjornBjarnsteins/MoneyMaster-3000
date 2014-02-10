@@ -1,0 +1,40 @@
+Lán eru skilgreind með:
+Nafn, Höfuðstóll, vextir, tími, verðtrygging
+
+  Nafn er strengur
+  Höfuðstóll er int (>=0)
+  vextir er float (>=0)
+  tími er int (>=0), fjöldi mánaða eftir af láninu.
+  verðtrygging er boolean og segir til um hvort reikningurinn er verðtryggður
+
+Sparnaðarreikningar eru skilgreindir með:
+Nafn, Upphæð, vextir, verðtrygging, binditími
+  
+  Nafn er strengur
+  Upphæð er int (>=0)
+  vextir er float (>=0)
+  verðtrygging er boolean og segir til um hvort reikningurinn er verðtryggður
+  binditími er float(>=0)
+  
+Hugmynd að command line interface:
+
+  "Sláðu inn lán:" (les svo inn upplýsingar)
+  "Viltu slá inn annað lán? (y/n)"
+  y
+  "Sláðu inn lán: " (les inn upplýsingar)
+  "Viltu slá inn annað lán? (y/n)"
+  n
+  "Sláðu inn sparifé:" (upphæðina sem á að setja inn á heppilega sparnaðarleið)
+  "Sláðu inn mánaðarlegan sparnað: "
+  "Sláðu inn viðmiðunartíma í mánuðum: "
+  "Sláðu inn sparnaðarmarkmið: (-1 ef á ekki við)"
+  "Sláðu inn sparnaðartíma: (-1 ef á ekki við)" 
+  "Sláðu inn fjölda mánaða sem þú vilt fá ráðleggingar um: (-1 ef á ekki við)"
+  Svo myndi forritið skila niðurstöðum úr þeim innsláttum þar sem notandi sló ekki inn -1
+  eins og ef hann hefði aldrei slegið inn -1 kæmi:
+  "Besta sparnaðarleiðin fyrir þig er: "
+  "Það tekur þig X mánuði að safna þessari upphæð"
+  "Á þessum tíma nærðu að safna: "
+  "Á næstu X mánuðum er best fyrir þig að borga niður lán Y/leggja inn á sparnað Z"
+
+Verðbólga (for now) miðast við meðalverðbólgu á árunum 2011-2013 og er 4,35%
