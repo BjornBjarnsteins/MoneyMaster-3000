@@ -58,11 +58,11 @@ class Loan:
 	def printProgression(self, payment, M):
 		prog = self.progression(payment, M)
 		amount = locale.currency(self.amount, grouping = True)
-		print 'HÃ¶fuÃ°stÃ³ll Ã­ upphafi: '+amount
+		print 'Höfuðstóll í upphafi: '+amount
 		for i in range(0,len(prog[0])):
 			pay = locale.currency(prog[0][i], grouping = True)
 			debt = locale.currency(prog[1][i], grouping = True)
-			print 'MÃ¡nuÃ°ur %d: \n Afborgun: %s HÃ¶fuÃ°stÃ³ll: %s' %(i+1, pay, debt)
+			print 'Mánuður %d: \n Afborgun: %s Höfuðstóll: %s' %(i+1, pay, debt)
 	
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
