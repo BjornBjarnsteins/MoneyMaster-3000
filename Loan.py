@@ -4,7 +4,7 @@
 
 import locale
 import math
-locale.setlocale( locale.LC_ALL, 'is_IS.UTF-8')
+locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
@@ -55,6 +55,15 @@ class Loan:
 			i += 1
 			
 		return [pay,debt]
+		
+	def printProgression(self, payment, M):
+		prog = self.progression(payment, M)
+		amount = locale.currency(self.amount, grouping = True)
+		print 'Höfuðstóll í upphafi: '+amount
+		for i in range(0,len(prog[0])):
+			pay = locale.currency(prog[0][i], grouping = True)
+			debt = locale.currency(prog[1][i], grouping = True)
+			print 'Mánuður %d: \n Afborgun: %s Höfuðstóll: %s' %(i+1, pay, debt)
 	
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
