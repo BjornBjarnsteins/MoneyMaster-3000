@@ -19,7 +19,12 @@ class Loan:
 	
 	def __str__(self):
 		amount = locale.currency(self.amount, grouping = True)
-		return "Lan: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, str(self.dex))
+		if self.dex:
+			vtr = 'Ja'
+		else:
+			vtr = 'Nei'
+		print vtr
+		return "Lan: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tölur >= 0
@@ -62,11 +67,6 @@ class Loan:
 	# Eftir:  p er array sem sýnir stöðu nú og þróun skuldar yfir lánstímabilið fyrstu M Mánuðina
 	def debtProgression(self,payment,M):
 		return self.progression(payment,M)[1]
-	
-	# Notkun: i = interestM(payment, months)
-	# Fyrir:  payment er heil tala >=0, months er heil tala >=0, M er heil tala >=0
-	# Eftir:  i er heildar umframgreiðsla(þ.m.t. vextir) í krónum á tímabilinu M, m.v. payment krónur aukalega í afborgun mánaðarlega fyrstu months mánuðina.
-	# def interestM(self, payment, months, M):
 		
 	# Notkun: i = totInterest(payment, M)
 	# Fyrir:  payment er heiltala >= 0, M er heiltala >=0
@@ -74,3 +74,30 @@ class Loan:
 	def totInterest(self, payment, M):
 		total = sum(self.payProgression(payment,M))
 		return (total-self.amount)
+	
+	# Notkun: a = plotLoanDebt(payment, M)
+	# Fyrir:  payment og M eru jákvæðar heiltölur (eða 0)
+	# Eftir:  a[1][n] er staða höfuðstóls á mánuði a[0][n] m.v. payment aukaframlag næstu M mánuðina
+	def datLoanDebt(self, payment, M):
+		month = range(1,self.m+1)
+		debt = self.debtProgression(payment,M)
+		while len(debt)<len(month):
+			debt.append(0.0)
+		return [month, debt]
+	
+	
+	# Notkun: a = plotLoanPay(payment, M)
+	# Fyrir:  payment og M eru jákvæðar heiltölur (eða 0)
+	# Eftir:  a[1][n] er greiðslubyrðin á mánuði a[0][n] m.v. payment aukaframlag næstu M mánuðina
+	def datLoanPay(self, payment, M):
+		month = range(1,self.m+1)
+		pay = self.payProgression(payment,M)
+		while len(pay)<len(month):
+			pay.append(0.0)
+		return [month, pay]
+		
+		
+		
+		
+		
+		
