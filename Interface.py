@@ -6,7 +6,7 @@ import storage;
 #import Savings;
 from Savings import *;
 import Calculator;
-locale.setlocale( locale.LC_ALL, 'icelandic')
+locale.setlocale( locale.LC_ALL, 'is_IS.UTF-8')
 
 def isfloat(x):
     try:

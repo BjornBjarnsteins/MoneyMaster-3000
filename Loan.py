@@ -4,7 +4,7 @@
 
 import locale
 import math
-locale.setlocale( locale.LC_ALL, 'icelandic')
+locale.setlocale( locale.LC_ALL, 'is_IS.UTF-8')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
