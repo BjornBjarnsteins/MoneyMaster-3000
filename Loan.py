@@ -41,7 +41,7 @@ class Loan:
 		debt = [self.amount]
 		i = 0
 		while principle > 0:
-			intPay = (principle*index)*interest
+			intPay = principle*((1+index)*(1+interest)-1)
 			fee = min(self.baseFee, principle)
 			principle -= fee
 			if i<M:
@@ -58,11 +58,11 @@ class Loan:
 	def printProgression(self, payment, M):
 		prog = self.progression(payment, M)
 		amount = locale.currency(self.amount, grouping = True)
-		print 'Höfuðstóll í upphafi: '+amount
+		print 'HÃ¶fuÃ°stÃ³ll Ã­ upphafi: '+amount
 		for i in range(0,len(prog[0])):
 			pay = locale.currency(prog[0][i], grouping = True)
 			debt = locale.currency(prog[1][i], grouping = True)
-			print 'Mánuður %d: \n Afborgun: %s Höfuðstóll: %s' %(i+1, pay, debt)
+			print 'MÃ¡nuÃ°ur %d: \n Afborgun: %s HÃ¶fuÃ°stÃ³ll: %s' %(i+1, pay, debt)
 	
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
