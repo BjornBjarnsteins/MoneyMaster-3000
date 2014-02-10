@@ -123,17 +123,14 @@ class Frame(wx.Frame):
         self.sizer2 = wx.BoxSizer(wx.VERTICAL)
         self.sizer2.Add(self.notebook, 1, wx.ALL|wx.EXPAND, 5)
         self.panel.SetSizer(self.sizer2)
-        
         self.__set_properties()
         self.__do_layout()
-        
         menuBar = wx.MenuBar()
         file = wx.Menu()
         exit = file.Append(wx.ID_EXIT,'Exit','k')
         menuBar.Append(file,'File')
         self.Bind(wx.EVT_MENU,self.Exit,exit)
         self.SetMenuBar(menuBar)
-        
         self.Center()
         # end wxGlade
         
@@ -171,4 +168,5 @@ if __name__ == "__main__":
     frame = Frame(None, wx.ID_ANY, "")
     app.SetTopWindow(frame)
     frame.Show()
+
     app.MainLoop()

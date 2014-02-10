@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 # -*- coding: cp1252 -*-
 import math
 import locale

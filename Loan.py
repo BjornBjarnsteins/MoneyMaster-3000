@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 # -*- coding: cp1252 -*-
-# Klasi sem skilgreinir lÃ¡n sem hlut (ÃºtgÃ¡fa LeÃ³s)
+# Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
 
 import locale
 locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
-	# Eftir:  L er lÃ¡n sem heitir Name, meÃ° hÃ¶fuÃ°stÃ³l Amount, Interest Ã¡rsvexti, Months tÃ­ma eftir og Index segir til um verÃ°tryggingu.
+	# Eftir:  L er lán sem heitir Name, meğ höfuğstól Amount, Interest ársvexti, Months tíma eftir og Index segir til um verğtryggingu.
 	def __init__(self, name, amount, interest, months, index):
 		self.name = name
 		self.interest = interest
@@ -17,12 +17,12 @@ class Loan:
 	
 	def __str__(self):
 		amount = locale.currency(self.amount, grouping = True)
-		return "LÃ¡n: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, str(self.dex))
+		return "Lan: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, str(self.dex))
 	
 	# Notkun: p = progression(payment)
-	# Fyrir:  payment,M eru heilar tÃ¶lur >= 0
-	# Eftir:  p er fylki, fyrsti dÃ¡lkur sÃ½nir afborganir af lÃ¡ninu m.v. aÃ° aukalega sÃ©u greiddar
-	#		  payment krÃ³nur inn Ã¡ reikninginn mÃ¡naÃ°arlega fyrstu M mÃ¡nuÃ°ina, seinni dÃ¡lkur sÃ½nir hÃ¶fuÃ°stÃ³l Ã­ byrjun hvers mÃ¡naÃ°ar.
+	# Fyrir:  payment,M eru heilar tölur >= 0
+	# Eftir:  p er fylki, fyrsti dálkur sınir afborganir af láninu m.v. ağ aukalega séu greiddar
+	#		  payment krónur inn á reikninginn mánağarlega fyrstu M mánuğina, seinni dálkur sınir höfuğstól í byrjun hvers mánağar.
 	def progression(self, payment, M):
 		principle = self.amount
 		months = self.m
@@ -51,25 +51,29 @@ class Loan:
 		return [pay,debt]
 	
 	# Notkun: p = payProgression(payment,M)
-	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
-	# Eftir:  p er array sem sÃ½nir stÃ¶Ã°u nÃº og Ã¾rÃ³un greiÃ°slubyrÃ°ar yfir lÃ¡nstÃ­mabiliÃ° fyrstu M MÃ¡nuÃ°ina
+	# Fyrir:  payment,M eru heiltölur >= 0
+	# Eftir:  p er array sem sınir stöğu nú og şróun greiğslubyrğar yfir lánstímabiliğ fyrstu M Mánuğina
 	def payProgression(self,payment,M):
 		return self.progression(payment,M)[0]
 	
 	# Notkun: p = debtProgression(payment,M)
-	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
-	# Eftir:  p er array sem sÃ½nir stÃ¶Ã°u nÃº og Ã¾rÃ³un skuldar yfir lÃ¡nstÃ­mabiliÃ° fyrstu M MÃ¡nuÃ°ina
+	# Fyrir:  payment,M eru heiltölur >= 0
+	# Eftir:  p er array sem sınir stöğu nú og şróun skuldar yfir lánstímabiliğ fyrstu M Mánuğina
 	def debtProgression(self,payment,M):
 		return self.progression(payment,M)[1]
 	
 	# Notkun: i = interestM(payment, months)
 	# Fyrir:  payment er heil tala >=0, months er heil tala >=0, M er heil tala >=0
-	# Eftir:  i er heildar umframgreiÃ°sla(Ã¾.m.t. vextir) Ã­ krÃ³num Ã¡ tÃ­mabilinu M, m.v. payment krÃ³nur aukalega Ã­ afborgun mÃ¡naÃ°arlega fyrstu months mÃ¡nuÃ°ina.
+	# Eftir:  i er heildar umframgreiğsla(ş.m.t. vextir) í krónum á tímabilinu M, m.v. payment krónur aukalega í afborgun mánağarlega fyrstu months mánuğina.
 	# def interestM(self, payment, months, M):
 		
 	# Notkun: i = totInterest(payment, M)
 	# Fyrir:  payment er heiltala >= 0, M er heiltala >=0
-	# Eftir:  i eru heildarvextir Ã­ krÃ³num Ã¡ Ã¶llu lÃ¡ninu m.v. payment aukaframlag fyrstu M mÃ¡nuÃ°ina.
+	# Eftir:  i eru heildarvextir í krónum á öllu láninu m.v. payment aukaframlag fyrstu M mánuğina.
 	def totInterest(self, payment, M):
 		total = sum(self.payProgression(payment,M))
 		return (total-self.amount)
+	
+if __name__ == '__main__':
+	L = Loan("tra",2443,1.1,15,True)
+	print L
