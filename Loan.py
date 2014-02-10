@@ -20,11 +20,10 @@ class Loan:
 	def __str__(self):
 		amount = locale.currency(self.amount, grouping = True)
 		if self.dex:
-			vtr = 'Ja'
+			vtr = 'Já'
 		else:
 			vtr = 'Nei'
-		print vtr
-		return "Lan: %s \nHofudstoll: %s \nArsvextir: %0.2f \nLengd(manudir): %0.2f \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
+		return "Lán: %s \nHöfuðstóll: %s \nÁrsvextir: %0.2f \nLengd(mánuðir): %d \nVerðtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tÃ¶lur >= 0

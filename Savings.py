@@ -1,7 +1,7 @@
 # -*- coding: cp1252 -*-
 import math
 import locale
-locale.setlocale( locale.LC_ALL, 'is_IS.UTF-8')
+locale.setlocale( locale.LC_ALL, 'icelandic')
 
 class Savings:
     
@@ -117,16 +117,16 @@ class Savings:
 
         return m+n
 		
-	# Notkun: a = plotSavings(payment, m, M)
-	# Fyrir:  payment, m og M eru jákvæðar heiltölur (eða 0)
-	# Eftir:  a[1][n] er staða reiknings+uppsafnaðir vextir á mánuði a[0][n] m.v. payment aukaframlag næstu m mánuðina litið til M mánuða
-	def datSavings(self, payment, m, M):
-		month = range(1,M+1)
-		status = self.progression(payment, m, M)[1:]
-		amount = []
-		for i in status:
-			amount.append(sum(i))
-		return [month, amount]
+    # Notkun: a = plotSavings(payment, m, M)
+    # Fyrir:  payment, m og M eru jákvæðar heiltölur (eða 0)
+    # Eftir:  a[1][n] er staða reiknings+uppsafnaðir vextir á mánuði a[0][n] m.v. payment aukaframlag næstu m mánuðina litið til M mánuða
+    def datSavings(self, payment, m, M):
+        month = range(1,M+1)
+        status = self.progression(payment, m, M)[1:]
+        amount = []
+        for i in status:
+            amount.append(sum(i))
+        return [month, amount]
         
 
    
