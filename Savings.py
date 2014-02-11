@@ -19,7 +19,7 @@ class Savings:
         self.mrates = self.p/12.0 #mánaðarlegir vextir reiknaðir út frá ársvöxtum
 
         if(index):
-            self.adjustedp = self.mrates*self.minflux
+            self.adjustedp = (1+self.mrates)*(1+self.minflux)-1
         else:
             self.adjustedp = self.mrates
     
@@ -83,6 +83,26 @@ class Savings:
             
         return prog
 
+    #Útgáfa af progression fallinu þar sem reikning er leyft að ávaxtast í n-1 mánuði, og á n-ta mánuði er byrjað að borga inn upphæð monthly næstu m mánuðina. Skoðum stöðuna eftir M mánuði.
+    def progression2(self, loanFee, monthly, n, m, M):
+        prog1 = self.progression(0, M, M)
+        temp = Savings('Temp', 0, self.p*100, self.dex, self.b)
+        prog2 = temp.progression(monthly+loanFee, m, M-n+1)
+        prog3 = temp.progression(loanFee,M-n+1-m,M-n+1-m)
+        prog = []
+        for element in prog1:
+            prog.append(element)
+
+        for i in range(0,len(prog2)):
+            prog[n-1+i][0] += prog2[i][0]
+            prog[n-1+i][1] += prog2[i][1]
+
+        for i in range(0,len(prog3)):
+            prog[n-1+m+i][0] += prog3[i][0]
+            prog[n-1+m+i][1] += prog3[i][1]
+            
+        return prog
+        
     def printProgression(self, monthly, m, M):
         prog = self.progression(monthly, m, M)
         s = ''
@@ -120,19 +140,19 @@ class Savings:
     # Notkun: a = plotSavings(payment, m, M)
     # Fyrir:  payment, m og M eru jákvæðar heiltölur (eða 0)
     # Eftir:  a[1][n] er staða reiknings+uppsafnaðir vextir á mánuði a[0][n] m.v. payment aukaframlag næstu m mánuðina litið til M mánuða
-    def datSavings(self, payment, m, M):
+    def datSavings(self, monthly, m, M):
         month = range(1,M+1)
-        status = self.progression(payment, m, M)[1:]
+        status = self.progression(monthly, m, M)[1:]
         amount = []
         for i in status:
             amount.append(sum(i))
         return [month, amount]
+
+    def datSavings2(self, baseFee, monthly, n, m, M):
+        prog = self.progression2(baseFee, monthly, n, m, M)[1:]
         
-
-   
-
-
-    
-
-
-    
+        month = range(1,M+1)
+        amount = []
+        for i in prog:
+            amount.append(sum(i))
+        return [month, amount]
