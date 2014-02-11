@@ -4,7 +4,9 @@
 import Savings
 import Loan
 from xlrd import *
-import Requests
+import requests
+import urllib
+import webbrowser
 
 #
 
@@ -75,19 +77,18 @@ def loadSAccts():
 #	  eru af heimasíðu seðlabankans
 def getInflation():
 	# Opnar Excel-skjalið
-	infl = open_workbook(urllib2.urlopen('http://hagtolur.sedlabanki.is/data/export/xls/'))
-	sheet = infl.sheet_by_index(1)
-	lastLine = getLastLine(sheet, 16)
+	infl = open_workbook('infl.xls')
+	sheet = infl.sheet_by_index(0)
 	inflsum = 0
-	for n in range(lastLine-24, lastLine):
-		inflsum = inflsum + sheet.cell(n, 1).value
-	return inflsum/24
+	for n in range(279, 303):
+		inflsum = inflsum + sheet.cell_value(n-1, 1)
+	return inflsum/24.0
 
 # Notkun: i = getLastLine(sheet, n)
 # Fyrir:  sheet er síða í Excelskjali, n er heiltala
 # Eftir:  i er númerið á seinustu línunni í skjalinu eftir línu n
 def getLastLine(sheet, n):
-	while (true):	
+	while (True):	
 		if sheet.cell(n, 0) == empty_cell:
 			return n-1
 		else:
