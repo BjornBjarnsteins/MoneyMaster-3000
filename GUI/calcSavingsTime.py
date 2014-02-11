@@ -20,7 +20,8 @@ class TabPanel(wx.Panel):
         sizer = wx.BoxSizer(wx.VERTICAL)
 
         title1 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,10))
-        title1.SetFont(wx.Font(24, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans Narrow"))
+        title1.SetFont(wx.Font(24, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60))
         self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning"), ""], 
@@ -31,14 +32,14 @@ class TabPanel(wx.Panel):
         
         self.combo_box_1.SetSelection(0)
         
-        up = -4
+        up = -10
         self.txt2 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,125+up))
-        self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,145+up))
+        self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuða',pos=(28,200+up))
-        self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,220+up))
+        self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuða',pos=(28,190+up))
+        self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
         
-        self.btn = wx.Button(self,label="Reikna sparnaðartímabil",pos=(28,280+up-4),size=(-1,-1))
+        self.btn = wx.Button(self,label="Reikna sparnaðartímabil",pos=(28,260+up-4),size=(-1,-1))
         
         self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
         
