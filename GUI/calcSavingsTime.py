@@ -33,10 +33,10 @@ class TabPanel(wx.Panel):
         self.combo_box_1.SetSelection(0)
         
         up = -10
-        self.txt2 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,125+up))
+        self.txt2 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,125+up))
         self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuða',pos=(28,190+up))
+        self.txt3 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,190+up))
         self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
         
         self.btn = wx.Button(self,label="Reikna sparnaðartímabil",pos=(28,260+up-4),size=(-1,-1))

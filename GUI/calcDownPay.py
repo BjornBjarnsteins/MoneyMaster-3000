@@ -37,9 +37,8 @@ class TabPanel(wx.Panel):
                                        wx.CB_READONLY,pos=(28,70),size=(230, 25))
         populateComboBoxSavings(self)
         
-        self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lán")], 
-                                       style=wx.CB_DROPDOWN | wx.CB_DROPDOWN | 
-                                       wx.CB_READONLY,pos=(28,105),size=(230, 125))
+        self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lán")],style= wx.CB_READONLY,pos=(28,105),size=(230, 125))
+        self.combo_box_2.SetSelection(0)
         self.SetFont(wx.Font(10,family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         

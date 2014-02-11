@@ -63,14 +63,10 @@ class TreeSidebar(wx.Treebook):
         imID +=1
         self.AddSubPage(Reikningar.TabPanel(self),"Reikninga",imageId=0)
         self.AddSubPage(Lan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(None,"Reiknivél",imageId = imID)
+        self.AddPage(None,"Reiknivél                       ",imageId = imID)
         self.AddSubPage(calcSparnadur.TabPanel(self),"Sparnaðarmarkmið ",imageId=0)
         self.AddSubPage(calcSavingsTime.TabPanel(self),"Sparnaðartímabil",imageId=0)
         self.AddSubPage(calcDownPay.TabPanel(self),"Niðurgreiðslur lána",imageId=0)
-        imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Peningastöff                     ",imageId=imID)
-        imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Faux Excel",imageId=imID)
 
         
         self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 

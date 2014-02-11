@@ -32,7 +32,7 @@ class TabPanel(wx.Panel):
         self.combo_box_1.SetSelection(0)
         
         up = -13
-        self.txt2 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,125+up))
+        self.txt2 = wx.StaticText(self,-1,'Sparnaðarmarkmið',pos=(28,125+up))
         self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,145+up))
 
         self.txt3 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,186+up))
