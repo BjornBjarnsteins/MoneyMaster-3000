@@ -5,7 +5,11 @@ import Loan
 import Savings
 import storage
 
-# Eftir:  L er lán sem heitir Name, með höfuðstól Amount, Interest ársvexti, Months tíma eftir og Index segir til um verðtryggingu.
+
+#Notkun: t = compareLS(l,s,monthly,M)
+#Fyrir: l er Loan hlutur, s er Savings hlutur, monthly>=0 rauntala, M>=0 heiltala
+#Eftir: t = l ef hagstæðara er fyrir notanda að greiða upphæð monthly inn á l í M mánuði, t = s annars
+#       'hagstæðara' telst vera meiri eignir að M mánuðum loknum.
 
 a = storage.loadLoans()
 dictLoans = {}
@@ -17,37 +21,41 @@ class TabPanel(wx.Panel):
     def __init__(self, parent):
         
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
-        self.SetFont(wx.Font(10, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        self.SetFont(wx.Font(10, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         sizer = wx.BoxSizer(wx.VERTICAL)
-        font2 = wx.Font(12, wx.SCRIPT, wx.NORMAL, wx.BOLD)
-
         self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lan"), ""], style=wx.CB_DROPDOWN | wx.CB_DROPDOWN | wx.CB_READONLY,pos=(28,70),size=(230, 25))
-        self.SetFont(wx.Font(10, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        self.SetFont(wx.Font(10,family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         populateComboBox(self)
 
         self.combo_box_2.SetSelection(0)
         
         title1 = wx.StaticText(self,-1,'Lánareiknivél',pos=(28,10))
-        title1.SetFont(wx.Font(24, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans Narrow"))
+        title1.SetFont(wx.Font(24, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60)) 
-        self.combo_box_2.Bind(wx.EVT_COMBOBOX, self.reikna)
         self.combo_box_2.Bind(wx.EVT_TEXT,self.values)
+        plot_icon = wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+        plot = wx.StaticBitmap(self,-1,plot_icon,pos=(325,230))
 
         self.Fit()
 
         self.SetSizer(sizer)
 
-    
-    def reikna(self,event):
-        print "ups"
+
     def values(self,event):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
-                                 -1,str(dictLoans[self.combo_box_2.GetValue()]),pos=(15,10),size=(800,200))
-        someInfo.SetFont(wx.Font(14, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+                                 -1,str(dictLoans[self.combo_box_2.GetValue()]),pos=(15,10))
+        someInfo.SetFont(wx.Font(14, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         someInfo.SetForegroundColour("blue")
-        self.GetParent().GetParent().GetParent().bottomwindow.SetScrollRate(10,10)
-        self.GetParent().GetParent().GetParent().bottomwindow.SetVirtualSize(someInfo.GetVirtualSize())
+        
+    def cleanPanel(self,window):
+            for child in window.GetChildren():
+                if type(child) != wx._controls.StaticBitmap:
+                    child.Destroy()
         
 def populateComboBox(self):
     a = storage.loadLoans()

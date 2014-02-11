@@ -18,7 +18,8 @@ class TabPanel(wx.Panel):
         self.SetFont(wx.Font(10, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         sizer = wx.BoxSizer(wx.VERTICAL)
-        title1 = wx.StaticText(self,-1,'Sparnaðarmarkmið',pos=(28,10))
+
+        title1 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,10))
         title1.SetFont(wx.Font(24, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans Narrow"))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60))
@@ -34,35 +35,36 @@ class TabPanel(wx.Panel):
         self.txt2 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,125+up))
         self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,145+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,200+up))
+        self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuða',pos=(28,200+up))
         self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,220+up))
         
-        self.btn = wx.Button(self,label="Reikna sparnaðarmarkmið",pos=(28,280+up-4),size=(-1,-1))
+        self.btn = wx.Button(self,label="Reikna sparnaðartímabil",pos=(28,280+up-4),size=(-1,-1))
         
         self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
         
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
+        
         plot_icon = wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
         plot = wx.StaticBitmap(self,-1,plot_icon,pos=(325,230))
         
         self.Fit()
         
         self.SetSizer(sizer)
-        #Notkun: m = saveuptoX(monthly,X)
-    #Fyrir: monthly,X>=0 rauntölur
-    #Eftir: m er fjöldi mánaða sem það tekur að safna upp X pening a reikning þ.a. það megi taka hann út strax.
+    
     def calculate(self,event):
         name = self.combo_box_1.GetValue()
         savings = storage.loadSAccts()
-        monthly = self.inputTxt2.GetValue()
-        X = self.inputTxt1.GetValue()
-        #Eftir: m er fjöldi mánaða sem það tekur að safna upp X pening a reikning þ.a. það megi taka hann út strax.
+                    #Notkun: m = saveforM(monthly, M)
+    #Fyrir: monthly,M>=0 rauntölur
+    #Eftir: m er upphæð sem tekist hefur að safna á M mánuðum með monthly sparnaði á mánuði og má taka út strax.
         text = ""
+        monthly = self.inputTxt2.GetValue()
+        M = self.inputTxt1.GetValue()
         for i in savings:
             if i.n == name:
                 acct = i
-                val = acct.saveuptoX(float(monthly),float(X))
-                text = str(val)+ " er fjöldi mánaða sem það tekur að safna upp "+X+" pening \ná reikning þ.a. það megi taka hann út strax."
+                val = acct.saveforM(float(monthly),int(M))
+                text = str(val)+ " er upphæð sem tekist hefur að safna á "+self.inputTxt2.GetValue()+" mánuðum \nmeð monthly sparnaði á mánuði og má taka út strax"
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,text,pos=(15,10),size=(800,200))

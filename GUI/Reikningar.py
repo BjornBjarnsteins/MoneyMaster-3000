@@ -51,7 +51,8 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
     def __init__(self, parent):
         """"""
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
-        self.SetFont(wx.Font(10, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        self.SetFont(wx.Font(10, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         self.SetBackgroundColour("white")
         self.createAndLayout()
         
@@ -86,9 +87,9 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
 
         self.list.SetColumnWidth(0, 130)
         self.list.SetColumnWidth(1,80)
-        self.list.SetColumnWidth(2, 110)
-        self.list.SetColumnWidth(3, 100)
-        self.list.SetColumnWidth(4, 80)
+        self.list.SetColumnWidth(2, 70)
+        self.list.SetColumnWidth(3, 90)
+        self.list.SetColumnWidth(4, 100)
         
         # show how to select an item
         self.list.SetItemState(5, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)

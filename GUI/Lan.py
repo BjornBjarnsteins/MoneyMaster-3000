@@ -29,7 +29,8 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
     def __init__(self, parent):
         """"""
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
-        self.SetFont(wx.Font(10, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        self.SetFont(wx.Font(10,family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         self.SetBackgroundColour("white")
         self.createAndLayout()
         
