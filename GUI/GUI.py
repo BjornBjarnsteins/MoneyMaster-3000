@@ -72,7 +72,7 @@ class TreeSidebar(wx.Treebook):
         self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
 
-        am = wx.StaticBitmap(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(40,330))
+        am = wx.StaticBitmap(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(35,330))
 
 
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGED, self.OnPageChanged)
