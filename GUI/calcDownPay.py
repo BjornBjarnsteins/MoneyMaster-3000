@@ -91,9 +91,9 @@ class TabPanel(wx.Panel):
                     if j.name == nameL:
                         val = Calculator.compareLS(j, i,float(monthly), int(M))
                         if type(val) is Savings:
-                            text = "Hagstæðara er fyrir notanda að greiða upphæð \n" + monthly + " inn á "+ i.n+" í " + M +" mánuði,\n\'hagstæðara\' telst vera meiri eignir að "+M + " mánuðum loknum"
+                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
                         else:
-                            text = "Hagstæðara er fyrir notanda að greiða upphæð \n" + monthly + " inn á "+ j.name +" í " + M +" mánuði,\n\'hagstæðara\' telst vera meiri eignir að "+M + " mánuðum loknum"                       
+                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manuði,\n\'hagstæðara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,text,pos=(15,10),size=(800,200))
             someInfo.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))

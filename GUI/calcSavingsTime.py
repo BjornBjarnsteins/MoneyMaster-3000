@@ -65,7 +65,7 @@ class TabPanel(wx.Panel):
             if i.n == name:
                 acct = i
                 val = acct.saveforM(float(monthly),int(M))
-                text = str(val)+ " er upphæð sem tekist hefur að safna á "+self.inputTxt2.GetValue()+" mánuðum \nmeð monthly sparnaði á mánuði og má taka út strax"
+                text = str(val)+ " er upphaed sem tekist hefur ad safna a "+self.inputTxt2.GetValue()+" manudum \nmeð monthly sparnadi á manudi og ma taka ut strax"
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,text,pos=(15,10),size=(800,200))
