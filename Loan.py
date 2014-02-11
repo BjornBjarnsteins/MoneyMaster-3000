@@ -88,7 +88,7 @@ class Loan:
 	# Eftir:  a[1][n] er staða höfuðstóls á mánuði a[0][n] m.v. payment aukaframlag næstu M mánuðina
 	def datLoanDebt(self, payment, M):
 		month = range(1,self.m+1)
-		debt = self.debtProgression(payment,M)
+		debt = self.debtProgression(payment,M)[1:]
 		while len(debt)<len(month):
 			debt.append(0.0)
 		return [month, debt]
