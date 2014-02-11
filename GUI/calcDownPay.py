@@ -37,9 +37,8 @@ class TabPanel(wx.Panel):
                                        wx.CB_READONLY,pos=(28,70),size=(230, 25))
         populateComboBoxSavings(self)
         
-        self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lán")], 
-                                       style=wx.CB_DROPDOWN | wx.CB_DROPDOWN | 
-                                       wx.CB_READONLY,pos=(28,105),size=(230, 125))
+        self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lán")],style= wx.CB_READONLY,pos=(28,105),size=(230, 125))
+        self.combo_box_2.SetSelection(0)
         self.SetFont(wx.Font(10,family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         
@@ -91,9 +90,9 @@ class TabPanel(wx.Panel):
                     if j.name == nameL:
                         val = Calculator.compareLS(j, i,float(monthly), int(M))
                         if type(val) is Savings:
-                            text = "Hagstæðara er fyrir notanda að greiða upphæð \n" + monthly + " inn á "+ i.n+" í " + M +" mánuði,\n\'hagstæðara\' telst vera meiri eignir að "+M + " mánuðum loknum"
+                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
                         else:
-                            text = "Hagstæðara er fyrir notanda að greiða upphæð \n" + monthly + " inn á "+ j.name +" í " + M +" mánuði,\n\'hagstæðara\' telst vera meiri eignir að "+M + " mánuðum loknum"                       
+                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manuði,\n\'hagstæðara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,text,pos=(15,10),size=(800,200))
             someInfo.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))

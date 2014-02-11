@@ -33,10 +33,10 @@ class TabPanel(wx.Panel):
         self.combo_box_1.SetSelection(0)
         
         up = -10
-        self.txt2 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,125+up))
+        self.txt2 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,125+up))
         self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuða',pos=(28,190+up))
+        self.txt3 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,190+up))
         self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
         
         self.btn = wx.Button(self,label="Reikna sparnaðartímabil",pos=(28,260+up-4),size=(-1,-1))
@@ -65,7 +65,7 @@ class TabPanel(wx.Panel):
             if i.n == name:
                 acct = i
                 val = acct.saveforM(float(monthly),int(M))
-                text = str(val)+ " er upphæð sem tekist hefur að safna á "+self.inputTxt2.GetValue()+" mánuðum \nmeð monthly sparnaði á mánuði og má taka út strax"
+                text = str(val)+ " er upphaed sem tekist hefur ad safna a "+self.inputTxt2.GetValue()+" manudum \nmeð monthly sparnadi á manudi og ma taka ut strax"
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,text,pos=(15,10),size=(800,200))

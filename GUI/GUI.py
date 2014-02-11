@@ -63,20 +63,16 @@ class TreeSidebar(wx.Treebook):
         imID +=1
         self.AddSubPage(Reikningar.TabPanel(self),"Reikninga",imageId=0)
         self.AddSubPage(Lan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(None,"Reiknivél",imageId = imID)
+        self.AddPage(None,"Reiknivél                       ",imageId = imID)
         self.AddSubPage(calcSparnadur.TabPanel(self),"Sparnaðarmarkmið ",imageId=0)
         self.AddSubPage(calcSavingsTime.TabPanel(self),"Sparnaðartímabil",imageId=0)
         self.AddSubPage(calcDownPay.TabPanel(self),"Niðurgreiðslur lána",imageId=0)
-        imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Peningastöff                     ",imageId=imID)
-        imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Faux Excel",imageId=imID)
 
         
         self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
 
-        am = wx.StaticBitmap(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(40,330))
+        am = wx.StaticBitmap(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(35,330))
 
 
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGED, self.OnPageChanged)
