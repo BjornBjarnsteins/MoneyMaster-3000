@@ -92,7 +92,7 @@ class TabPanel(wx.Panel):
                         if type(val) is Savings:
                             text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
                         else:
-                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manuði,\n\'hagstæðara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
+                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manuði,\n\'hagstædara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,text,pos=(15,10),size=(800,200))
             someInfo.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
