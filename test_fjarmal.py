@@ -3,6 +3,7 @@ from Savings import *
 from Loan import *
 from Calculator import *
 #from storage import *
+from Plot import *
 
 S1 = Savings('Übersparnaður', 100000, 1.7, True, 12)
 S2 = Savings('Sparigrís', 100000, 3.5, False, 3)
@@ -61,3 +62,5 @@ S = compareSavings(S1,S2,1000,6,12)
 print S
 print '\nHvort er hagstæðara að borga mánaðarlegan sparnað inn á hagstæðari sparnaðinn eða hagstæðara lánið:'
 print compareLS(L,S,1000,6)
+
+plotLS(L,S,10000,12)
