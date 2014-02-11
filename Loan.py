@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: cp1252 -*-
-# Klasi sem skilgreinir lÃ¡n sem hlut (ÃºtgÃ¡fa LeÃ³s)
+# Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
 
 import locale
 import math
@@ -8,7 +8,7 @@ locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
-	# Eftir:  L er lÃ¡n sem heitir Name, meÃ° hÃ¶fuÃ°stÃ³l Amount, Interest Ã¡rsvexti, Months tÃ­ma eftir og Index segir til um verÃ°tryggingu.
+	# Eftir:  L er lán sem heitir Name, meğ höfuğstól Amount, Interest ársvexti, Months tíma eftir og Index segir til um verğtryggingu.
 	def __init__(self, name, amount, interest, months, index):
 		self.name = name
 		self.interest = interest
@@ -26,9 +26,10 @@ class Loan:
 		return "Lán: %s \nHöfuğstóll: %s \nÁrsvextir: %0.2f \nLengd(mánuğir): %d \nVerğtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
 	
 	# Notkun: p = progression(payment)
-	# Fyrir:  payment,M eru heilar tÃ¶lur >= 0
-	# Eftir:  p er fylki, fyrsti dÃ¡lkur sÃ½nir afborganir af lÃ¡ninu m.v. aÃ° aukalega sÃ©u greiddar
-	#		  payment krÃ³nur inn Ã¡ reikninginn mÃ¡naÃ°arlega fyrstu M mÃ¡nuÃ°ina, seinni dÃ¡lkur sÃ½nir hÃ¶fuÃ°stÃ³l Ã­ byrjun hvers mÃ¡naÃ°ar.
+	# Fyrir:  payment,M eru heilar tölur >= 0
+	# Eftir:  p er fylki, fyrsti dálkur sınir afborganir af láninu m.v. ağ aukalega séu greiddar
+	#         payment krónur inn á reikninginn mánağarlega fyrstu M mánuğina, annar dálkur sınir höfuğstól í byrjun hvers mánağar
+	#         og şriğji dálkur sınir vexti hvers mánağar.
 	def progression(self, payment, M):
 		principle = self.amount
 		months = self.m
@@ -38,6 +39,7 @@ class Loan:
 			index = 0
 		interest =(self.interest/100.0)/12.0
 		pay = []
+		interest = []
 		debt = [self.amount]
 		i = 0
 		while principle > 0:
@@ -50,10 +52,11 @@ class Loan:
 				payment = 0
 			principle -= payment
 			pay.append(round(fee+payment+intPay))
+			interest.append(intPay)
 			debt.append(principle)
 			i += 1
 			
-		return [pay,debt]
+		return [pay,debt,interest]
 		
 	def printProgression(self, payment, M):
 		prog = self.progression(payment, M)
@@ -65,27 +68,33 @@ class Loan:
 			print 'Mánuğur %d: \n Afborgun: %s Höfuğstóll: %s' %(i+1, pay, debt)
 	
 	# Notkun: p = payProgression(payment,M)
-	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
-	# Eftir:  p er array sem sÃ½nir stÃ¶Ã°u nÃº og Ã¾rÃ³un greiÃ°slubyrÃ°ar yfir lÃ¡nstÃ­mabiliÃ° fyrstu M MÃ¡nuÃ°ina
+	# Fyrir:  payment,M eru heiltölur >= 0
+	# Eftir:  p er array sem sınir stöğu nú og şróun greiğslubyrğar yfir lánstímabiliğ fyrstu M Mánuğina
 	def payProgression(self,payment,M):
 		return self.progression(payment,M)[0]
 	
 	# Notkun: p = debtProgression(payment,M)
-	# Fyrir:  payment,M eru heiltÃ¶lur >= 0
-	# Eftir:  p er array sem sÃ½nir stÃ¶Ã°u nÃº og Ã¾rÃ³un skuldar yfir lÃ¡nstÃ­mabiliÃ° fyrstu M MÃ¡nuÃ°ina
+	# Fyrir:  payment,M eru heiltölur >= 0
+	# Eftir:  p er array sem sınir stöğu nú og şróun skuldar yfir lánstímabiliğ fyrstu M Mánuğina
 	def debtProgression(self,payment,M):
 		return self.progression(payment,M)[1]
 		
 	# Notkun: i = totInterest(payment, M)
 	# Fyrir:  payment er heiltala >= 0, M er heiltala >=0
-	# Eftir:  i eru heildarvextir Ã­ krÃ³num Ã¡ Ã¶llu lÃ¡ninu m.v. payment aukaframlag fyrstu M mÃ¡nuÃ°ina.
+	# Eftir:  i eru heildarvextir í krónum á öllu láninu m.v. payment aukaframlag fyrstu M mánuğina.
 	def totInterest(self, payment, M):
-		total = sum(self.payProgression(payment,M))
-		return (total-self.amount)
+		return round(sum(self.progression(payment,M)[2]))
+
+	# Notkun: i = interestM(payment, m, M)
+	# Fyrir:  payment, m og M eru jákvæğar heiltölur
+	# Eftir:  i eru heildarvextir af láninu í krónum eftir M mánuği m.v. ağ greiddar séu payment auka
+	#         krónur inn á höfuğstól fyrstu m mánuğina. (ş.e. vextir fyrstu M mánuğa laggğir saman)
+        def interestM(self, payment, m, M):
+                return round(sum(self.progression(payment,M)[2][:M]))
 	
 	# Notkun: a = plotLoanDebt(payment, M)
-	# Fyrir:  payment og M eru jÃ¡kvÃ¦Ã°ar heiltÃ¶lur (eÃ°a 0)
-	# Eftir:  a[1][n] er staÃ°a hÃ¶fuÃ°stÃ³ls Ã¡ mÃ¡nuÃ°i a[0][n] m.v. payment aukaframlag nÃ¦stu M mÃ¡nuÃ°ina
+	# Fyrir:  payment og M eru jákvÃ¦ğar heiltölur (eğa 0)
+	# Eftir:  a[1][n] er stağa höfuğstóls á mánuği a[0][n] m.v. payment aukaframlag nÃ¦stu M mánuğina
 	def datLoanDebt(self, payment, M):
 		month = range(1,self.m+1)
 		debt = self.debtProgression(payment,M)[1:]
@@ -95,8 +104,8 @@ class Loan:
 	
 	
 	# Notkun: a = plotLoanPay(payment, M)
-	# Fyrir:  payment og M eru jÃ¡kvÃ¦Ã°ar heiltÃ¶lur (eÃ°a 0)
-	# Eftir:  a[1][n] er greiÃ°slubyrÃ°in Ã¡ mÃ¡nuÃ°i a[0][n] m.v. payment aukaframlag nÃ¦stu M mÃ¡nuÃ°ina
+	# Fyrir:  payment og M eru jákvÃ¦ğar heiltölur (eğa 0)
+	# Eftir:  a[1][n] er greiğslubyrğin á mánuği a[0][n] m.v. payment aukaframlag nÃ¦stu M mánuğina
 	def datLoanPay(self, payment, M):
 		month = range(1,self.m+1)
 		pay = self.payProgression(payment,M)

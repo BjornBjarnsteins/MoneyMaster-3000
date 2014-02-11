@@ -4,9 +4,10 @@
 # Eftir:  L er şağ lán sem er hagstæğara ağ borga niğur fyrst.
 from Savings import *
 from Loan import *
-def compareLoans(L1, L2, payment, M):
-    A = L1.totInterest(0,0)-L1.totInterest(payment,M)
-    B = L2.totInterest(0,0)-L2.totInterest(payment,M)
+def compareLoans(L1, L2, payment, m):
+    M = min(L1.m,L2.m)
+    A = L1.interestM(0,0,M)-L1.interestM(payment,m,M)
+    B = L2.interestM(0,0,M)-L2.interestM(payment,m,M)
     if A > B:
         return L1
     else:
