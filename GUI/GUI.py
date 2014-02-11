@@ -16,7 +16,7 @@ import gettext
 #icons tekið frá http://www.gentleface.com/free_icon_set.html
 
 #búið var til þetta app með http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ til hliðsjónar
-import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan
+import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan,calcSavingsTime,calcDownPay
 
 #hjalparfall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
 def getNextImageID(count):
@@ -45,39 +45,40 @@ class TreeSidebar(wx.Treebook):
         il.Add(calc_icon)
         dollar_icon = wx.Image('icons/dollar_icon.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
         il.Add(dollar_icon)
-    
-        plot_icon = wx.Image('icons/plot2_icon.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
-        il.Add(plot_icon)
         excel_icon = wx.Image('icons/excel_icon.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+        
         il.Add(excel_icon)      
         self.AssignImageList(il)
         imageIdGenerator = getNextImageID(il.GetImageCount())
-        
         imID = 1;
-        self.AddPage(defAccount.TabPanel(self), "Home                   " ,imageId=imID)
+        self.AddPage(None, "Home" ,imageId=imID)
+                
         imID +=1
-        self.AddPage(defAccount.TabPanel(self), "Skilgreina",imageId=imID)
+        self.AddPage(None, "Skilgreina   ",imageId=imID)
         imID +=1
+        
         self.AddSubPage(defAccount.TabPanel(self),"Reikning",imageId=0)
         self.AddSubPage(defLoan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(Reikningar.TabPanel(self), "Skoða               ",imageId=imID)
+        self.AddPage(None, "Skoða",imageId=imID)
         imID +=1
         self.AddSubPage(Reikningar.TabPanel(self),"Reikninga",imageId=0)
         self.AddSubPage(Lan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(calcSparnadur.TabPanel(self),"Reiknivél",imageId = imID)
-        self.AddSubPage(calcSparnadur.TabPanel(self),"Sparnaður",imageId=0)
-        self.AddSubPage(calcLan.TabPanel(self),"Lán",imageId=0)
+        self.AddPage(None,"Reiknivél",imageId = imID)
+        self.AddSubPage(calcSparnadur.TabPanel(self),"Sparnaðarmarkmið ",imageId=0)
+        self.AddSubPage(calcSavingsTime.TabPanel(self),"Sparnaðartímabil",imageId=0)
+        self.AddSubPage(calcDownPay.TabPanel(self),"Niðurgreiðslur lána",imageId=0)
         imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Peningastöff",imageId=imID)
-        imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Plot",imageId=imID)
-        self.AddSubPage(defAccount.TabPanel(self),"44")
+        self.AddPage(defAccount.TabPanel(self),"Peningastöff                     ",imageId=imID)
         imID +=1
         self.AddPage(defAccount.TabPanel(self),"Faux Excel",imageId=imID)
-        imID +=1
-        self.AddPage(defAccount.TabPanel(self),"Annað",imageId=imID)
+
         
-        
+        self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
+
+        am = wx.StaticBitmap(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(40,330))
+
+
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGED, self.OnPageChanged)
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGING, self.OnPageChanging)
         self.SetMinSize((600,100))
@@ -116,10 +117,14 @@ class Frame(wx.Frame):
         wx.Frame.__init__(self, *args, **kwds)
         coin = wx.Icon('coins.ico', wx.BITMAP_TYPE_ICO, 16, 16)
         wx.Frame.SetIcon(self,coin)
-        self.bottomwindow = wx.ScrolledWindow(self, wx.ID_ANY, style=wx.TAB_TRAVERSAL)                
+
+
         self.panel = wx.Panel(self)
         self.notebook = TreeSidebar(self.panel)
-        self.panel.SetFont(wx.Font(12, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        
+        self.bottomwindow = wx.ScrolledWindow(self, wx.ID_ANY)
+        self.bottomwindow.SetScrollRate(5,5)
+        
         self.sizer2 = wx.BoxSizer(wx.VERTICAL)
         self.sizer2.Add(self.notebook, 1, wx.ALL|wx.EXPAND, 5)
         self.panel.SetSizer(self.sizer2)
@@ -141,11 +146,12 @@ class Frame(wx.Frame):
         # begin wxGlade: Frame.__set_properties
         self.SetTitle(_("MoneyMaster-3000"))
         self.SetSize((800, 700))
-        self.bottomwindow.SetMinSize((800,200))
+        self.bottomwindow.SetMinSize((800,500))
         self.bottomwindow.SetScrollRate(10, 10)
         self.panel.SetMinSize((800,500))
         self.panel.SetBackgroundColour(wx.Colour(223, 228, 255))
         self.bottomwindow.SetBackgroundColour("white")
+
         # end wxGlade
 
     def __do_layout(self):

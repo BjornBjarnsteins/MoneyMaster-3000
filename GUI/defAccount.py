@@ -11,20 +11,20 @@ class TabPanel(wx.Panel):
         """"""
         
         wx.Panel.__init__(self, parent=parent, id=wx.ID_ANY)
-        self.SetFont(wx.Font(10, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        self.SetFont(wx.Font(10, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         sizer = wx.BoxSizer(wx.VERTICAL)
-        font2 = wx.Font(12, wx.SCRIPT, wx.NORMAL, wx.BOLD)
 
         right = -70
         down = -130
         label1 = wx.StaticText(self, -1, 'Nafn reiknings',pos=(100+right,202+down))
-        self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(240+right,200+down))
+        self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(240+right,200+down),size=(140,-1))
   
         label2 = wx.StaticText(self, -1, 'Upphafleg innistæða',pos=(100+right,232+down))
-        self.inputTxt2 = wx.TextCtrl(self, -1, '',pos=(240+right,230+down))
+        self.inputTxt2 = wx.TextCtrl(self, -1, '',pos=(240+right,230+down),size=(140,-1))
         
         label3 = wx.StaticText(self, -1, 'Ársvextir',pos=(100+right,260+down))
-        self.inputTxt3 = wx.TextCtrl(self, -1, '',pos=(240+right,262+down))
+        self.inputTxt3 = wx.TextCtrl(self, -1, '',pos=(240+right,262+down),size=(140,-1))
         
         label4 = wx.StaticText(self, -1, 'Verðtrygging',pos=(100+right,294+down))
         
@@ -32,7 +32,7 @@ class TabPanel(wx.Panel):
         self.input42 = wx.RadioButton(self, -1, 'Nei',pos=(290+right,295+down))
 
         label5 = wx.StaticText(self, -1, 'Binditími',pos=(100+right,327+down))
-        self.inputTxt5 = wx.TextCtrl(self, -1, '',pos=(240+right,323+down))
+        self.inputTxt5 = wx.TextCtrl(self, -1, '',pos=(240+right,323+down),size=(140,-1))
        
         self.btnSparnadur = wx.Button(self,label="Vista reikning",pos=(240+right,355+down),size=(111,-1))
         self.color=self.GetBackgroundColour()
@@ -41,9 +41,10 @@ class TabPanel(wx.Panel):
         # set frame size to fit panel
         self.Fit()
         title1 = wx.StaticText(self,-1,'Skilgreina reikning',pos=(28,10))
-        title1.SetFont(wx.Font(24, wx.MODERN, wx.NORMAL, wx.NORMAL, 0, "PT Sans Narrow"))
+        title1.SetFont(wx.Font(24, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans Narrow",
+                                           weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
-        piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60))
+        piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(355,60))
         self.SetSizer(sizer)
         
         self.btnSparnadur.Bind(wx.EVT_BUTTON, self.saveAccount)
