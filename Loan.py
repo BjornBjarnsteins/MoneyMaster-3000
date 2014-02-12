@@ -99,8 +99,12 @@ class Loan:
 	def datLoanDebt(self, payment, M):
 		month = range(1,self.m+1)
 		debt = self.debtProgression(payment,M)[1:]
+		interest = self.progression(payment,M)[2][:len(debt)]
 		while len(debt)<len(month):
 			debt.append(0.0)
+		while len(interest)<len(month):
+			interest.append(0.0)
+		data = [ debt[i] + interest[i] for i in range(len(month))]
 		return [month, debt]
 	
 	
