@@ -71,7 +71,7 @@ def loadSAccts():
 	SAccts = []
 	for line in open('savings.txt'):
 		args = line.split('-')
-		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), int(args[3]), float(args[4]))]
+		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3], float(args[4]))]
 	return SAccts
 
 if __name__=="__main__":
