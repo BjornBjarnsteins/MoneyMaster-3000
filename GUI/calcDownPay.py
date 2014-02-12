@@ -57,7 +57,7 @@ class TabPanel(wx.Panel):
         self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,220+up))
 
 
-        self.txt4 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,255+up))
+        self.txt4 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,255+up))
         self.inputTxt3 = wx.TextCtrl(self, -1, '' ,pos=(28,274+up))
         
         self.btn = wx.Button(self,label="Reikna!",pos=(28,330+up-16),size=(-1,-1))
@@ -68,7 +68,7 @@ class TabPanel(wx.Panel):
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
         
         plot_icon = wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
-        plot = wx.StaticBitmap(self,-1,plot_icon,pos=(330,230))
+        plot = wx.StaticBitmap(self,-1,plot_icon,pos=(325,230))
         
         self.Fit()
         
