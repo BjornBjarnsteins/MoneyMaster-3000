@@ -2,14 +2,15 @@
 from Savings import *
 from Loan import *
 from Calculator import *
-from storage import *
+#from storage import *
 from Plot import *
 
+#Profar Loan og Savings:
 S1 = Savings('Ubersparnadur', 100000, 1.7, True, 12)
 S2 = Savings('Sparigris', 100000, 3.5, False, 3)
 
 L1 = Loan('Husnaedislan', 30000000, 1.3, 240, True)
-L2 = Loan('Yfirdrattur', 150000, 20, 6, False)
+L2 = Loan('Yfirdrattur', 450000, 20, 6, False)
 print L1
 print
 print L2
@@ -54,19 +55,21 @@ L2.printProgression(1000, 0)
 print 'Uppsafnadir vextir verda:'
 print L2.totInterest(1000,0)
 
+#Profar Calculator
 print '\nHvort lanid aettirdu ad borga inn a:'
-L = compareLoans(L1, L2, 1000, 6)
+L = compareLoans(L1, L2, 50000, 3)
 print L
 print '\nHvor sparnadarreikningurinn er hagstaedari fyrir tig:'
-S = compareSavings(S1,S2,1000,6,12)
+S = compareSavings(S1,S2,50000,3,16)
 print S
 print '\nHvort er hagstaedara ad borga manadarlegan sparnad inn a hagstaedari sparnadinn eda hagstaedara lanid:'
-print compareLS(L,S,1000,6)
+print compareLS(L,S,50000,3)
 
-plotLS(L,S,10000,12)
+#Profar plot
+plotLS(L,S,50000,3)
+plotPayProg(L,50000,3)
 
-# Profar storage follin
-
+# Profar storage
 storeAllLoans([L1, L2])
 loans = loadLoans()
 print "\n\nProfar loadLoans()"
