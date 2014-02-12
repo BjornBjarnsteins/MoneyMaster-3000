@@ -4,9 +4,6 @@
 import Savings
 import Loan
 from xlrd import *
-import requests
-import urllib
-import webbrowser
 
 #
 

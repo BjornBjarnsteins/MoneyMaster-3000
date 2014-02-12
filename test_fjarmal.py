@@ -2,7 +2,7 @@
 from Savings import *
 from Loan import *
 from Calculator import *
-#from storage import *
+from storage import *
 from Plot import *
 
 S1 = Savings('Übersparnaður', 100000, 1.7, True, 12)
@@ -64,3 +64,20 @@ print '\nHvort er hagstæðara að borga mánaðarlegan sparnað inn á hagstæðari spar
 print compareLS(L,S,1000,6)
 
 plotLS(L,S,10000,12)
+
+# Profar storage follin
+
+storeAllLoans([L1, L2])
+loans = loadLoans()
+print "\n\nProfar loadLoans()"
+for n in range(0, len(loans)):
+	print loans[n]
+
+print "\n\nProfar loadSAccts()"
+savings = loadSAccts()
+for n in range(0, len(savings)):
+	print savings[n]
+
+print "\n\nProfar getInflation()"
+print getInflation()
+
