@@ -45,16 +45,16 @@ def loadLoans():
 
 # Notkun: storeSAcct(s)
 # Fyrir:  s er reikningur
-# Eftir:  s er geymdur í 'savings.txt' á forminu name-amount-interest-pay-index-bound, einn reikningur í línu
+# Eftir:  s er geymdur í 'usersavings.txt' á forminu name-amount-interest-pay-index-bound, einn reikningur í línu
 def storeSAcct(s):
-	storage = open('savings.txt', 'a')
+	storage = open('usersavings.txt', 'a')
 	storage.write('%s-%d-%f-%d-%s-%d\n' % (s.name, s.amount, s.interest, s.index, s.bound))
 
 # Notkun: storeAllSAccts(s)
 # Fyrir:  s er listi af reikningum
-# Eftir:  Skráin 'savings.txt' hefur verið tæmd og allir reikningarnir í s settir í hana
+# Eftir:  Skráin 'usersavings.txt' hefur verið tæmd og allir reikningarnir í s settir í hana
 def storeAllSAccts(s):
-	resetFile('savings.txt', 'a')
+	resetFile('usersavings.txt')
 	for n in range(0, len(l)):
 		storeSAcct(s[n])
 
@@ -63,6 +63,9 @@ def storeAllSAccts(s):
 def loadSAccts():
 	SAccts = []
 	for line in open('savings.txt'):
+		args = line.split('-')
+		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]==1, int(args[4]))]
+	for line in open('usersavings.txt'):
 		args = line.split('-')
 		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]==1, int(args[4]))]
 	return SAccts
