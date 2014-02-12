@@ -39,7 +39,7 @@ class Loan:
 			index = 0
 		interest =(self.interest/100.0)/12.0
 		pay = []
-		interest = []
+		intData = []
 		debt = [self.amount]
 		i = 0
 		while principle > 0:
@@ -52,11 +52,11 @@ class Loan:
 				payment = 0
 			principle -= payment
 			pay.append(round(fee+payment+intPay))
-			interest.append(intPay)
+			intData.append(intPay)
 			debt.append(principle)
 			i += 1
 			
-		return [pay,debt,interest]
+		return [pay,debt,intData]
 		
 	def printProgression(self, payment, M):
 		prog = self.progression(payment, M)
@@ -89,9 +89,10 @@ class Loan:
 	# Fyrir:  payment, m og M eru jákvæðar heiltölur
 	# Eftir:  i eru heildarvextir af láninu í krónum eftir M mánuði m.v. að greiddar séu payment auka
 	#         krónur inn á höfuðstól fyrstu m mánuðina. (þ.e. vextir fyrstu M mánuða laggðir saman)
-        def interestM(self, payment, m, M):
-                return round(sum(self.progression(payment,M)[2][:M]))
-	
+	def interestM(self, payment, m, M):
+		return round(sum(self.progression(payment,M)[2][:M]))
+
+
 	# Notkun: a = plotLoanDebt(payment, M)
 	# Fyrir:  payment og M eru jákvÃ¦ðar heiltölur (eða 0)
 	# Eftir:  a[1][n] er staða höfuðstóls á mánuði a[0][n] m.v. payment aukaframlag nÃ¦stu M mánuðina
