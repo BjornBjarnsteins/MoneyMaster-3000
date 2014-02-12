@@ -6,17 +6,17 @@ locale.setlocale( locale.LC_ALL, 'icelandic')
 class Savings:
     
     #Notkun: r = Savings(name, amount, interest, index, bound)
-    #Fyrir: name er strengur, amount,interest,bound>=0 rauntölur, index boolean
-    #Eftir: r er reikningur með heitið name, upphaflega innistæðu amount, vexti interest%, verðtryggður ef index=True, annars óverðtryggður og binditíma bound mánuðir. 
+    #Fyrir: name er strengur, amount,interest,bound>=0 rauntolur, index boolean
+    #Eftir: r er reikningur med heitid name, upphaflega innistaedu amount, vexti interest%, verdtryggdur ef index=True, annars overdtryggdur og binditima bound manudir. 
     def __init__(self, name, amount, interest, index, bound):
         self.n = name
         self.a = amount
         self.p = interest/100.0
         self.dex = index
         self.b = bound
-        self.influx = 0.0435  #Meðalverðbólga 2011-2013
+        self.influx = 0.0435  #Medalverdbolga 2011-2013
         self.minflux = 0.0435/12.0
-        self.mrates = self.p/12.0 #mánaðarlegir vextir reiknaðir út frá ársvöxtum
+        self.mrates = self.p/12.0 #manadarlegir vextir reiknadir ut fra arsvoxtum
 
         if(index):
             self.adjustedp = (1+self.mrates)*(1+self.minflux)-1
@@ -24,13 +24,13 @@ class Savings:
             self.adjustedp = self.mrates
     
 
-    #Notkun: print s eða a = str(s)
-    #Fyrir: Savings hlutur, Mánuður er 30 dagar
-    #Eftir: a er strengur sem heldur utan um allar upplýsingar um s
+    #Notkun: print s eda a = str(s)
+    #Fyrir: Savings hlutur, Manudur er 30 dagar
+    #Eftir: a er strengur sem heldur utan um allar upplysingar um s
     def __str__(self):
 
         if self.dex:
-            indexed = 'Já'
+            indexed = 'Ja'
         else:
             indexed = 'Nei'
 
@@ -42,29 +42,29 @@ class Savings:
             rest = self.b-years*12
             months = int(math.floor(rest))
             days = int((rest-months)*30)
-            bound = '%d ár, %d mánuðir, %d dagar' %(years, months, days)
+            bound = '%d ar, %d manudir, %d dagar' %(years, months, days)
         elif(math.floor(self.b) != 0):
             months = int(math.floor(self.b))
             days = int((self.b-months)*30)
-            bound = '%d mánuðir, %d dagar' %(months, days)
+            bound = '%d manudir, %d dagar' %(months, days)
         else: 
             days = int(self.b*30)
             bound = str(days)+' dagar'
         
         amount = locale.currency(self.a, grouping = True)
         
-        return 'Sparnaðarreikningur: %s \nStaða: %s \nÁrsvextir: %0.2f%s \nVerðtrygging: %s \nBinditími: %s' %(self.n, amount, interest,'%', indexed, bound)
+        return 'Sparnadarreikningur: %s \nStada: %s \nÁrsvextir: %0.2f%s \nVerdtrygging: %s \nBinditimi: %s' %(self.n, amount, interest,'%', indexed, bound)
 
     #Notkun: data = progression(monthly,M)
-    #Fyrir: monthly>=0 rauntala, M>0 heiltala G.r.f. að það sé janúar
-    #Eftir: data heldur utan um stöðu sparnaðarreiknings frá upphafsstöðu og næstu M mánuði þar a eftir
-    #       þar sem upphæð monthly hefur verið lögð inn hvern mánuð.
+    #Fyrir: monthly>=0 rauntala, M>0 heiltala G.r.f. ad tad se januar
+    #Eftir: data heldur utan um stodu sparnadarreiknings fra upphafsstodu og naestu M manudi tar a eftir
+    #       tar sem upphaed monthly hefur verid logd inn hvern manud.
     def progression(self, monthly, m, M):
 
         total = self.a
         collectedInt = 0
-        prog = [[total,0]] #setjum inn upphafsstöðu reiknings í fyrsta sætið og uppsafnaða vexti
-        for i in range(0,m): #næstu m mánuðina leggjum við upphæð monthly inn a reikninginn.
+        prog = [[total,0]] #setjum inn upphafsstodu reiknings i fyrsta saetid og uppsafnada vexti
+        for i in range(0,m): #naestu m manudina leggjum vid upphaed monthly inn a reikninginn.
             if(i%12 == 0):
                 total = total+collectedInt
                 collectedInt = 0
@@ -73,7 +73,7 @@ class Savings:
             collectedInt += total*self.adjustedp
             prog.append([int(math.floor(total)), collectedInt])
 
-        for i in range(m,M): #síðustu M-m mánuðina leggjum við ekkert inn á reikninginn og sjáum hvernig hann þróast aðeins a vöxtum.
+        for i in range(m,M): #sidustu M-m manudina leggjum vid ekkert inn a reikninginn og sjaum hvernig hann troast adeins a voxtum.
             if(i%12 == 0):
                 total = total+collectedInt
                 collectedInt = 0
@@ -83,7 +83,7 @@ class Savings:
             
         return prog
 
-    #Útgáfa af progression fallinu þar sem reikning er leyft að ávaxtast í n-1 mánuði, og á n-ta mánuði er byrjað að borga inn upphæð monthly næstu m mánuðina. Skoðum stöðuna eftir M mánuði.
+    #Útgafa af progression fallinu tar sem reikning er leyft ad avaxtast i n-1 manudi, og a n-ta manudi er byrjad ad borga inn upphaed monthly naestu m manudina. Skodum stoduna eftir M manudi.
     def progression2(self, loanFee, monthly, n, m, M):
         prog1 = self.progression(0, M, M)
         temp = Savings('Temp', 0, self.p*100, self.dex, self.b)
@@ -106,24 +106,24 @@ class Savings:
     def printProgression(self, monthly, m, M):
         prog = self.progression(monthly, m, M)
         s = ''
-        print 'Upphafsstaða: %s' %(locale.currency(prog[0][0], grouping=True))
+        print 'Upphafsstada: %s' %(locale.currency(prog[0][0], grouping=True))
         for i in range(1,len(prog)):
             amount = locale.currency(prog[i][0], grouping = True)
             collectedInt = locale.currency(prog[i][1], grouping = True)
-            print 'Mánuður %d: \n Staða: %s Uppsafnaðir vextir: %s' %(i, amount, collectedInt)
+            print 'Manudur %d: \n Stada: %s Uppsafnadir vextir: %s' %(i, amount, collectedInt)
 
     #Notkun: m = saveforM(monthly, M)
-    #Fyrir: monthly,M>=0 rauntölur
-    #Eftir: m er upphæð sem tekist hefur að safna á M mánuðum með monthly sparnaði á mánuði og má taka út strax.
+    #Fyrir: monthly,M>=0 rauntolur
+    #Eftir: m er upphaed sem tekist hefur ad safna a M manudum med monthly sparnadi a manudi og ma taka ut strax.
     def saveforM(self, monthly, M):
-        m = max(int(math.floor(M-self.b)),0) #spara með því að leggja fyrir reglulega í m mán
+        m = max(int(math.floor(M-self.b)),0) #spara med tvi ad leggja fyrir reglulega i m man
         prog = self.progression(monthly, m, M)
         return prog[M][0]
 
 
     #Notkun: m = saveuptoX(monthly,X)
-    #Fyrir: monthly,X>=0 rauntölur
-    #Eftir: m er fjöldi mánaða sem það tekur að safna upp X pening a reikning þ.a. það megi taka hann út strax.
+    #Fyrir: monthly,X>=0 rauntolur
+    #Eftir: m er fjoldi manada sem tad tekur ad safna upp X pening a reikning t.a. tad megi taka hann ut strax.
     def saveuptoX(self, monthly, X):
 
         total = self.a
@@ -138,8 +138,8 @@ class Savings:
         return m+n
 		
     # Notkun: a = plotSavings(payment, m, M)
-    # Fyrir:  payment, m og M eru jákvæðar heiltölur (eða 0)
-    # Eftir:  a[1][n] er staða reiknings+uppsafnaðir vextir á mánuði a[0][n] m.v. payment aukaframlag næstu m mánuðina litið til M mánuða
+    # Fyrir:  payment, m og M eru jakvaedar heiltolur (eda 0)
+    # Eftir:  a[1][n] er stada reiknings+uppsafnadir vextir a manudi a[0][n] m.v. payment aukaframlag naestu m manudina litid til M manuda
     def datSavings(self, monthly, m, M):
         month = range(1,M+1)
         status = self.progression(monthly, m, M)[1:]

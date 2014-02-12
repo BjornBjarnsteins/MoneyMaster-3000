@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: cp1252 -*-
-# Module sem sér um geymslu lána, sparnaðar, og mánaðarlegs sparnaðar
+# Module sem ser um geymslu lana, sparnadar, og manadarlegs sparnadar
 import Savings
 import Loan
 from xlrd import *
@@ -8,23 +8,23 @@ from xlrd import *
 #
 
 # Notkun: resetFile(filename)
-# Eftir:  Skráin filename er tóm 
+# Eftir:  Skrain filename er tom 
 def resetFile(filename):
 	storage = open(filename, 'w')
 
 
-# Föll til að geyma og ná í lán
+# Foll til ad geyma og na i lan
 
 # Notkun: storeLoan(l)
-# Fyrir:  l er lán
-# Eftir:  l hefur verið geymt í skránni 'loans.txt' á forminu 'name-amount-interest-months-index', eitt lán í línu
+# Fyrir:  l er lan
+# Eftir:  l hefur verid geymt i skranni 'loans.txt' a forminu 'name-amount-interest-months-index', eitt lan i linu
 def storeLoan(l):
 	storage = open('loans.txt', 'a')
 	storage.write('%s-%d-%f-%d-%s\n' % (l.name, l.amount, l.interest, l.m, l.dex)) 
 
 # Notkun: storeAllLoans(l)
-# Fyrir:  l er listi af lánum
-# Eftir:  'loans.txt' er tæmd og öll lánin í l hafa verið sett í skrána 'loans.txt'
+# Fyrir:  l er listi af lanum
+# Eftir:  'loans.txt' er taemd og oll lanin i l hafa verid sett i skrana 'loans.txt'
 def storeAllLoans(l):
 	resetFile('loans.txt')
 	for n in range(0, len(l)):
@@ -32,7 +32,7 @@ def storeAllLoans(l):
 
 
 # Notkun: loans = loadLoans()
-# Eftir:  loans er listi af öllum geymdum lánum
+# Eftir:  loans er listi af ollum geymdum lanum
 def loadLoans():
 	loans = []
 	for line in open('loans.txt'):
@@ -41,25 +41,25 @@ def loadLoans():
 	return loans
 
 
-# Föll til að geyma og ná í reikninga
+# Foll til ad geyma og na i reikninga
 
 # Notkun: storeSAcct(s)
 # Fyrir:  s er reikningur
-# Eftir:  s er geymdur í 'usersavings.txt' á forminu name-amount-interest-pay-index-bound, einn reikningur í línu
+# Eftir:  s er geymdur i 'usersavings.txt' a forminu name-amount-interest-pay-index-bound, einn reikningur i linu
 def storeSAcct(s):
 	storage = open('usersavings.txt', 'a')
 	storage.write('%s-%d-%f-%d-%s-%d\n' % (s.name, s.amount, s.interest, s.index, s.bound))
 
 # Notkun: storeAllSAccts(s)
 # Fyrir:  s er listi af reikningum
-# Eftir:  Skráin 'usersavings.txt' hefur verið tæmd og allir reikningarnir í s settir í hana
+# Eftir:  Skrain 'usersavings.txt' hefur verid taemd og allir reikningarnir i s settir i hana
 def storeAllSAccts(s):
 	resetFile('usersavings.txt')
 	for n in range(0, len(l)):
 		storeSAcct(s[n])
 
 # Notkun: accts = loadSAccts()
-# Eftir:  accts inniheldur alla reikningana í 'savings.txt'
+# Eftir:  accts inniheldur alla reikningana i 'savings.txt'
 def loadSAccts():
 	SAccts = []
 	for line in open('savings.txt'):
@@ -70,13 +70,13 @@ def loadSAccts():
 		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]==1, int(args[4]))]
 	return SAccts
 
-# Föll til að lesa verðbólguspá
+# Foll til ad lesa verdbolguspa
 
 # Notkun: infl = getInflation()
-# Eftir:  infl er meðalverðbólga seinustu tveggja ára m.v. gögn sem sótt
-#	  eru af heimasíðu seðlabankans
+# Eftir:  infl er medalverdbolga seinustu tveggja ara m.v. gogn sem sott
+#	  eru af heimasidu sedlabankans
 def getInflation():
-	# Opnar Excel-skjalið
+	# Opnar Excel-skjalid
 	infl = open_workbook('infl.xls')
 	sheet = infl.sheet_by_index(0)
 	inflsum = 0
@@ -85,8 +85,8 @@ def getInflation():
 	return inflsum/24.0
 
 # Notkun: i = getLastLine(sheet, n)
-# Fyrir:  sheet er síða í Excelskjali, n er heiltala
-# Eftir:  i er númerið á seinustu línunni í skjalinu eftir línu n
+# Fyrir:  sheet er sida i Excelskjali, n er heiltala
+# Eftir:  i er numerid a seinustu linunni i skjalinu eftir linu n
 def getLastLine(sheet, n):
 	while (True):	
 		if sheet.cell(n, 0) == empty_cell:
@@ -95,8 +95,8 @@ def getLastLine(sheet, n):
 			n = n+1
 
 if __name__=="__main__":
-#	l1 = Loan.Loan('bílalán', 100000, 0.05, 5, 1)
-#	l2 = Loan.Loan('húsnæðislán', 10000000, 0.04, 10, 0)
+#	l1 = Loan.Loan('bilalan', 100000, 0.05, 5, 1)
+#	l2 = Loan.Loan('husnaedislan', 10000000, 0.04, 10, 0)
 #	loans = [l1, l2]
 #	storeAllLoans(loans)
 #	loans2 = loadLoans()
