@@ -4,6 +4,7 @@
 
 import locale
 import math
+import storage
 locale.setlocale( locale.LC_ALL, 'icelandic')
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
@@ -34,7 +35,7 @@ class Loan:
 		principle = self.amount
 		months = self.m
 		if self.dex:
-			index = 0.0435/12.0
+			index = storage.getInflation()/1200.0
 		else:
 			index = 0
 		interest =(self.interest/100.0)/12.0
@@ -57,7 +58,9 @@ class Loan:
 			i += 1
 			
 		return [pay,debt,intData]
-		
+	# Notkun: printProgression(payment, M)
+	# Fyrir:  payment og M eru jakvaedar heiltolur
+	# Eftir:  nidurstodur ur progression(payment, M) eru prentadar ut a snyrtilegan mata i skel.
 	def printProgression(self, payment, M):
 		prog = self.progression(payment, M)
 		amount = locale.currency(self.amount, grouping = True)
