@@ -24,7 +24,7 @@ class TabPanel(wx.Panel):
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60))
-        self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning"), ""], 
+        self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning")], 
                                        style=wx.CB_DROPDOWN | wx.CB_DROPDOWN | 
                                        wx.CB_READONLY,pos=(28,70),size=(230, 25))
         populateComboBox(self)
@@ -33,11 +33,11 @@ class TabPanel(wx.Panel):
         self.combo_box_1.SetSelection(0)
         
         up = -10
-        self.txt2 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,125+up))
-        self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
+        self.txt3 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,125+up))
+        self.inputTxt2 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,190+up))
-        self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
+        self.txt2 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,190+up))
+        self.inputTxt1 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
         
         self.btn = wx.Button(self,label="Reikna sparnaðartímabil",pos=(28,260+up-4),size=(-1,-1))
         

@@ -5,7 +5,7 @@
 #
 
 import wx
-
+import webbrowser
 # begin wxGlade: dependencies
 import gettext
 # end wxGlade
@@ -13,12 +13,12 @@ import gettext
 # begin wxGlade: extracode
 # end wxGlade
 #----------------------------------------------------------------------
-#icons tekið frá http://www.gentleface.com/free_icon_set.html
+#icons taken from http://www.gentleface.com/free_icon_set.html
 
-#búið var til þetta app með http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ til hliðsjónar
+#lots of sources from http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ 
 import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan,calcSavingsTime,calcDownPay
 
-#hjalparfall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
+#helperfunction from http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
 def getNextImageID(count):
     imID = 0
     while True:
@@ -72,15 +72,20 @@ class TreeSidebar(wx.Treebook):
         self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
 
-        am = wx.StaticBitmap(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(33,343))
-
-
+        self.am = wx.BitmapButton(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(33,343),style=wx.NO_BORDER)
+        self.am.Bind(wx.EVT_BUTTON,self.openlink) 
+        self.am.SetBitmapHover(wx.Image('sedlabankihover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
+        
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGED, self.OnPageChanged)
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGING, self.OnPageChanging)
         self.SetMinSize((600,100))
         
         wx.FutureCall(100, self.AdjustSize)
         
+    def roa(self,event):
+        print "wd"
+    def openlink(self,event):
+        webbrowser.open('http://sedlabanki.is')
 #fall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
 
     def AdjustSize(self):
@@ -142,9 +147,9 @@ class Frame(wx.Frame):
         # begin wxGlade: Frame.__set_properties
         self.SetTitle(_("MoneyMaster-3000"))
         self.SetSize((800, 700))
-        self.bottomwindow.SetMinSize((800,500))
+        self.bottomwindow.SetMinSize((8000,500))
         self.bottomwindow.SetScrollRate(10, 10)
-        self.panel.SetMinSize((800,500))
+        self.panel.SetMinSize((8000,500))
         self.panel.SetBackgroundColour(wx.Colour(223, 228, 255))
         self.bottomwindow.SetBackgroundColour("white")
 

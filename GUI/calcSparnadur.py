@@ -23,7 +23,7 @@ class TabPanel(wx.Panel):
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60))
-        self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning"), ""], 
+        self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning")], 
                                        style=wx.CB_DROPDOWN | wx.CB_DROPDOWN | 
                                        wx.CB_READONLY,pos=(28,70),size=(230, 25))
         populateComboBox(self)
