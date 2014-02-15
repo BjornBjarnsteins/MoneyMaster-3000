@@ -58,7 +58,7 @@ class TabPanel(wx.Panel):
         else:
             input4 = False
         input5 = self.inputTxt5.GetValue()
-        spar = Savings.Savings(input1,float(input2),float(input3),input4,float(input5)) 
+        spar = Savings.Savings(input1,float(input2),float(input3)*100,input4,float(input5)) 
         storage.storeSAcct(spar)
         
 
