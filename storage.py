@@ -12,6 +12,11 @@ from xlrd import *
 def resetFile(filename):
 	storage = open(filename, 'w')
 
+# Notkun: removeEntry(list, n)
+# Fyrir:  list er listi, n er heiltala stærri en 0 og minni en lengd list
+# Eftir:  list[n] hefur verið tekið úr listanum
+def removeEntry(lname, n):
+	return lname[:n]+lname[n+1:]
 
 # Foll til ad geyma og na i lan
 
