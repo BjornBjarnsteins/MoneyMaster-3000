@@ -64,10 +64,10 @@ def loadSAccts():
 	SAccts = []
 	for line in open('savings.txt'):
 		args = line.split('-')
-		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]==1, float(args[4]))]
+		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]=='True', float(args[4]))]
 	for line in open('usersavings.txt'):
 		args = line.split('-')
-		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]==1, float(args[4]))]
+		SAccts = SAccts + [Savings.Savings(args[0], int(args[1]), float(args[2]), args[3]=='True', float(args[4]))]
 	return SAccts
 
 # Foll til ad lesa verdbolguspa
