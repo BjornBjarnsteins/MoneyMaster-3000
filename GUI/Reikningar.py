@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 import sys
 import wx
 import  wx.lib.mixins.listctrl  as  listmix

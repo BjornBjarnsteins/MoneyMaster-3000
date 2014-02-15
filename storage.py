@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 # Module sem ser um geymslu lana, sparnadar, og manadarlegs sparnadar
 import Savings
 import Loan

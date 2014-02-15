@@ -1,4 +1,4 @@
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 from Savings import *
 from Loan import *
 from Calculator import *

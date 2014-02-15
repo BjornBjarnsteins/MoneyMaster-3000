@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 # Klasi sem skilgreinir lán sem hlut (útgáfa Leós)
 
 import locale

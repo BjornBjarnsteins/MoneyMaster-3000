@@ -1,4 +1,4 @@
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 # Notkun: L = compareLoans(L1, L2, payment, M)
 # Fyrir:  L1 og L2 eru hlutir af taginu Loan, payment er heiltala >= 0 og M er rauntala >= 0
 # Eftir:  L er það lán sem er hagstæðara að borga niður fyrst.

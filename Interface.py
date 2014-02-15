@@ -1,4 +1,4 @@
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 #Markús 02.02.14
 #Þessi skrá á að hegða sér eins og einfalt command line interface
 import Loan;
