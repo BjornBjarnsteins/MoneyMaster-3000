@@ -27,7 +27,7 @@ class TabPanel(wx.Panel):
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         sizer = wx.BoxSizer(wx.VERTICAL)
 
-        title1 = wx.StaticText(self,-1,'Niğurgreiğslur lána',pos=(28,10))
+        title1 = wx.StaticText(self,-1,'NiÃ°urgreiÃ°slur lÃ¡na',pos=(28,10))
         title1.SetFont(wx.Font(24, family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
@@ -37,7 +37,7 @@ class TabPanel(wx.Panel):
                                        wx.CB_READONLY,pos=(28,70),size=(230, 25))
         populateComboBoxSavings(self)
         
-        self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lán")],style= wx.CB_READONLY,pos=(28,105),size=(230, 125))
+        self.combo_box_2 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja lÃ¡n")],style= wx.CB_READONLY,pos=(28,105),size=(230, 125))
         self.combo_box_2.SetSelection(0)
         self.SetFont(wx.Font(10,family=wx.FONTFAMILY_SWISS, style=wx.FONTSTYLE_NORMAL,faceName= "PT Sans",
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
@@ -50,14 +50,14 @@ class TabPanel(wx.Panel):
 
 #Notkun: t = compareLS(l,s,monthly,M)
 #Fyrir: l er Loan hlutur, s er Savings hlutur, monthly>=0 rauntala, M>=0 heiltala
-#Eftir: t = l ef hagstæğara er fyrir notanda ağ greiğa upphæğ monthly inn á l í M mánuği, t = s annars
-#       'hagstæğara' telst vera meiri eignir ağ M mánuğum loknum.
+#Eftir: t = l ef hagstÃ¦Ã°ara er fyrir notanda aÃ° greiÃ°a upphÃ¦Ã° monthly inn Ã¡ l Ã­ M mÃ¡nuÃ°i, t = s annars
+#       'hagstÃ¦Ã°ara' telst vera meiri eignir aÃ° M mÃ¡nuÃ°um loknum.
 
-        self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuğa',pos=(28,200+up))
+        self.txt3 = wx.StaticText(self,-1,'FjÃ¶ldi mÃ¡nuÃ°a',pos=(28,200+up))
         self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,220+up))
 
 
-        self.txt4 = wx.StaticText(self,-1,'Peningaupphæğ',pos=(28,255+up))
+        self.txt4 = wx.StaticText(self,-1,'PeningaupphÃ¦Ã°',pos=(28,255+up))
         self.inputTxt3 = wx.TextCtrl(self, -1, '' ,pos=(28,274+up))
         
         self.btn = wx.Button(self,label="Reikna!",pos=(28,330+up-16),size=(-1,-1))
@@ -79,8 +79,8 @@ class TabPanel(wx.Panel):
         nameL = self.combo_box_2.GetValue()
 #Notkun: t = compareLS(l,s,monthly,M)
 #Fyrir: l er Loan hlutur, s er Savings hlutur, monthly>=0 rauntala, M>=0 heiltala
-#Eftir: t = l ef hagstæğara er fyrir notanda ağ greiğa upphæğ monthly inn á l í M mánuği, t = s annars
-#       'hagstæğara' telst vera meiri eignir ağ M mánuğum loknum.
+#Eftir: t = l ef hagstÃ¦Ã°ara er fyrir notanda aÃ° greiÃ°a upphÃ¦Ã° monthly inn Ã¡ l Ã­ M mÃ¡nuÃ°i, t = s annars
+#       'hagstÃ¦Ã°ara' telst vera meiri eignir aÃ° M mÃ¡nuÃ°um loknum.
         text = ""
         monthly = self.inputTxt3.GetValue()
         M = self.inputTxt2.GetValue()
@@ -89,7 +89,7 @@ class TabPanel(wx.Panel):
                 for j in b:
                     if j.name == nameL:
                         val = Calculator.compareLS(j, i,float(monthly), int(M))
-                        if type(val) is Savings:
+                        if isinstance(val, Savings.Savings):
                             text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
                         else:
                             text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
@@ -126,7 +126,7 @@ def populateComboBoxLoans(self):
         
 class Frame(wx.Frame):
     def __init__(self):
-        wx.Frame.__init__(self, None, wx.ID_ANY, "Reiknivél sparnadur")
+        wx.Frame.__init__(self, None, wx.ID_ANY, "ReiknivÃ©l sparnadur")
        
         panel = TabPanel(self)
         
