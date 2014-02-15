@@ -84,8 +84,8 @@ def getInflation():
 		inflsum = inflsum + sheet.cell_value(n-1, 1)
 	return inflsum/24.0
 
-# Notkun: i = getLastLine(sheet, n)
-# Fyrir:  sheet er sida i Excelskjali, n er heiltala
+# Notkun: i = getLastLine(sheet, n) 
+# Fyrir:  sheet rer sida i Excelskjali, n er heiltala
 # Eftir:  i er numerid a seinustu linunni i skjalinu eftir linu n
 def getLastLine(sheet, n):
 	while (True):	
