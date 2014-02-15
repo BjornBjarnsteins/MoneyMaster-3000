@@ -13,12 +13,12 @@ import gettext
 # begin wxGlade: extracode
 # end wxGlade
 #----------------------------------------------------------------------
-#icons tekið frá http://www.gentleface.com/free_icon_set.html
+#icons tekiÃ° frÃ¡ http://www.gentleface.com/free_icon_set.html
 
-#búið var til þetta app með http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ til hliðsjónar
+#bÃºiÃ° var til Ã¾etta app meÃ° http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ til hliÃ°sjÃ³nar
 import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan,calcSavingsTime,calcDownPay
 
-#hjalparfall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
+#hjalparfall copy-pasteaÃ° frÃ¡ http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
 def getNextImageID(count):
     imID = 0
     while True:
@@ -58,23 +58,23 @@ class TreeSidebar(wx.Treebook):
         imID +=1
         
         self.AddSubPage(defAccount.TabPanel(self),"Reikning",imageId=0)
-        self.AddSubPage(defLoan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(None, "Skoða",imageId=imID)
+        self.AddSubPage(defLoan.TabPanel(self),"LÃ¡n",imageId=0)
+        self.AddPage(None, "SkoÃ°a",imageId=imID)
         imID +=1
         self.AddSubPage(Reikningar.TabPanel(self),"Reikninga",imageId=0)
-        self.AddSubPage(Lan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(None,"Reiknivél                       ",imageId = imID)
-        self.AddSubPage(calcSparnadur.TabPanel(self),"Sparnaðarmarkmið ",imageId=0)
-        self.AddSubPage(calcSavingsTime.TabPanel(self),"Sparnaðartímabil",imageId=0)
-        self.AddSubPage(calcDownPay.TabPanel(self),"Niðurgreiðslur lána",imageId=0)
+        self.AddSubPage(Lan.TabPanel(self),"LÃ¡n",imageId=0)
+        self.AddPage(None,"ReiknivÃ©l                       ",imageId = imID)
+        self.AddSubPage(calcSparnadur.TabPanel(self),"SparnaÃ°armarkmiÃ° ",imageId=0)
+        self.AddSubPage(calcSavingsTime.TabPanel(self),"SparnaÃ°artÃ­mabil",imageId=0)
+        self.AddSubPage(calcDownPay.TabPanel(self),"NiÃ°urgreiÃ°slur lÃ¡na",imageId=0)
 
         
         self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
 
-		self.am = wx.BitmapButton(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(33,343),style=wx.NO_BORDER)
-		self.am.Bind(wx.EVT_BUTTON,self.openlink) 
-		self.am.SetBitmapHover(wx.Image('sedlabankihover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
+        self.am = wx.BitmapButton(self.GetTreeCtrl(),-1,wx.Image('sedlabanki.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(33,343),style=wx.NO_BORDER)
+        self.am.Bind(wx.EVT_BUTTON,self.openlink) 
+        self.am.SetBitmapHover(wx.Image('sedlabankihover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
 		
 
         self.Bind(wx.EVT_TREEBOOK_PAGE_CHANGED, self.OnPageChanged)
@@ -83,15 +83,15 @@ class TreeSidebar(wx.Treebook):
         
         wx.FutureCall(100, self.AdjustSize)
         
-#fall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
-	def openlink(self,event):
-		webbrowser.open('http://sedlabanki.is')
+#fall copy-pasteaÃ° frÃ¡ http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
+    def openlink(self,event):
+        webbrowser.open('http://sedlabanki.is')
     def AdjustSize(self):
         #print self.GetTreeCtrl().GetBestSize()
         self.GetTreeCtrl().InvalidateBestSize()
         self.SendSizeEvent()
     
-#fall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
+#fall copy-pasteaÃ° frÃ¡ http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
     def OnPageChanged(self, event):
         old = event.GetOldSelection()
         new = event.GetSelection()
@@ -100,7 +100,7 @@ class TreeSidebar(wx.Treebook):
         self.GetPage(6).refreshList()
         event.Skip()
 
-#fall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
+#fall copy-pasteaÃ° frÃ¡ http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
     def OnPageChanging(self, event):
         old = event.GetOldSelection()
         new = event.GetSelection()
