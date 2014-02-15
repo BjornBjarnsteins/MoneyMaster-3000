@@ -56,7 +56,7 @@ def compareLS(l,s, monthly, m):
 
     #Case 2: Borgum inn a lan en ekki sparnad.
     #Tap2 = vextirnir sem safnast upp yfir lanstimann.
-    #Grodi2 = Ágodi af tvi ad borga manadarlegt framlag inn a sparnadarreikning af tvi loknu ad borga nidur lan
+    #Grodi2 = §odi af tvi ad borga manadarlegt framlag inn a sparnadarreikning af tvi loknu ad borga nidur lan
     #       + agodi af tvi borga hefdbundna afborgun af lani inn a sparnadarreikning uns lanstima likur.
     T = M-len(l.payProgression(monthly,m))
     t = max(m-T,0)

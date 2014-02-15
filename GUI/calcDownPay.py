@@ -90,7 +90,7 @@ class TabPanel(wx.Panel):
                     if j.name == nameL:
                         val = Calculator.compareLS(j, i,float(monthly), int(M))
                         if isinstance(val, Savings.Savings):
-                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
+                            text = "Hagstaeara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
                         else:
                             text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
         if text != "":
