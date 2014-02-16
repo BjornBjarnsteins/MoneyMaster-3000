@@ -4,6 +4,7 @@
 import Savings
 import Loan
 from xlrd import *
+from bs4 import BeautifulSoup
 
 #
 
@@ -20,7 +21,8 @@ def resetFile(filename):
 # Eftir:  l hefur verid geymt i skranni 'loans.txt' a forminu 'name-amount-interest-months-index', eitt lan i linu
 def storeLoan(l):
 	storage = open('loans.txt', 'a')
-	storage.write('%s-%d-%f-%d-%s\n' % (l.name, l.amount, l.interest, l.m, l.dex)) 
+	name = l.name.encode('cp1252')
+	storage.write('%s-%d-%f-%d-%s\n' % (name, l.amount, l.interest, l.m, l.dex)) 
 
 # Notkun: storeAllLoans(l)
 # Fyrir:  l er listi af lanum
@@ -48,7 +50,7 @@ def loadLoans():
 # Eftir:  s er geymdur i 'usersavings.txt' a forminu name-amount-interest-pay-index-bound, einn reikningur i linu
 def storeSAcct(s):
 	storage = open('usersavings.txt', 'a')
-	storage.write('%s-%d-%f-%s-%f\n' % (s.n, s.a, s.p*100, s.dex, s.b))
+	storage.write('%s-%d-%f-%s-%f\n' % (s.n.encode('cp1252'), s.a, float(s.p)*100, s.dex, s.b))
 
 # Notkun: storeAllSAccts(s)
 # Fyrir:  s er listi af reikningum
@@ -95,6 +97,8 @@ def getLastLine(sheet, n):
 			n = n+1
 
 if __name__=="__main__":
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 #	l1 = Loan.Loan('bilalan', 100000, 0.05, 5, 1)
 #	l2 = Loan.Loan('husnaedislan', 10000000, 0.04, 10, 0)
 #	loans = [l1, l2]
@@ -105,5 +109,3 @@ if __name__=="__main__":
 
 #	s = loadSAccts()
 #	print s[0]
-
-	print getInflation()

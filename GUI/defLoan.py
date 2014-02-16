@@ -5,6 +5,8 @@ import gettext
 import Loan
 import Savings
 import storage
+from bs4 import BeautifulSoup
+#please download BeautifulSoup if you have not already
 class TabPanel(wx.Panel):
     def __init__(self, parent):
 
@@ -59,7 +61,7 @@ class TabPanel(wx.Panel):
         else:
             input4 = False
         input5 = self.inputTxt5.GetValue()
-        lan = Loan.Loan(input1,float(input2),float(input3),float(input5),input4) 
+        lan = Loan.Loan(unicode(BeautifulSoup(input1)),float(input2),float(input3),float(input5),input4) 
         storage.storeLoan(lan)
         
     def on_paint(self, event):
@@ -80,6 +82,8 @@ class Frame(wx.Frame):
         
 #----------------------------------------------------------------------
 if __name__ == "__main__":
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
     gettext.install("app") # replace with the appropriate catalog name
     app = wx.PySimpleApp()
     frame = Frame()

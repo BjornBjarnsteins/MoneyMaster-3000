@@ -5,12 +5,14 @@
 import locale
 import math
 import storage
+
 locale.setlocale( locale.LC_ALL, 'icelandic')
+
 class Loan:
 	# Notkun: L = Loan(Name, Amount, Interest, Months, Index)
 	# Fyrir:  Name er strengur, Amount er heiltala >=0, Interest er heiltala >= 0, Months er heiltala >0 og Index er boolean.
 	# Eftir:  L er lan sem heitir Name, med hofudstol Amount, Interest arsvexti, Months tima eftir og Index segir til um verdtryggingu.
-	def __init__(self, name, amount, interest, months, index):
+	def __init__(self,name, amount, interest, months, index):
 		self.name = name
 		self.interest = interest
 		self.dex = index
@@ -121,7 +123,9 @@ class Loan:
 			pay.append(0.0)
 		return [month, pay]
 		
-		
+if __name__=="__main__":
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 		
 		
 		

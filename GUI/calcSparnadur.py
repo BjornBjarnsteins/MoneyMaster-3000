@@ -1,15 +1,17 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+#ATTENTION! YOU NEED TO DOWNLOAD THE BEAUTIFULSOUP LIBRARY BEFORE RUNNING THIS CODE
+
 import wx
 import Loan
 import Savings
 import storage
-
+from bs4 import BeautifulSoup
 import gettext
 a = storage.loadSAccts()
 dictLoans = {}
 for i in a:
-    dictLoans[str(i.n)]=str(i)
+    dictLoans[BeautifulSoup(i.n)]=str(i)
     
 class TabPanel(wx.Panel):
     def __init__(self, parent):
@@ -23,7 +25,7 @@ class TabPanel(wx.Panel):
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
         piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
         piggyGraphic = wx.StaticBitmap(self,-1,piggy,pos=(345,60))
-        self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning"), ""], 
+        self.combo_box_1 = wx.ComboBox(self, wx.ID_ANY, choices=[_("Velja reikning")], 
                                        style=wx.CB_DROPDOWN | wx.CB_DROPDOWN | 
                                        wx.CB_READONLY,pos=(28,70),size=(230, 25))
         populateComboBox(self)
@@ -31,27 +33,36 @@ class TabPanel(wx.Panel):
         
         self.combo_box_1.SetSelection(0)
         
-        up = -13
-        self.txt2 = wx.StaticText(self,-1,'Sparnaðarmarkmið',pos=(28,125+up))
-        self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,145+up))
+        up = -10
+        self.txt3 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,125+up))
+        self.inputTxt2 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,186+up))
-        self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,212+up))
+        self.txt2 = wx.StaticText(self,-1,'Sparnaðarmarkmið',pos=(28,190+up))
+        self.inputTxt1 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
         
-        self.btn = wx.Button(self,label="Reikna sparnaðarmarkmið",pos=(28,280+up-25),size=(-1,-1))
+        self.btn = wx.Button(self,label="Reikna tíma",pos=(28,260+up-4),size=(-1,-1))
         
         self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
         
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
-        plot_icon = wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
-        plot = wx.StaticBitmap(self,-1,plot_icon,pos=(325,230))
+        self.plotBtn = wx.BitmapButton(self,-wx.ID_ANY,wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(325,230),style=wx.NO_BORDER)
+        self.plotBtn.Bind(wx.EVT_BUTTON,self.calculate) 
+        self.plotBtn.SetBitmapHover(wx.Image('grafhover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
         
         self.Fit()
         
         self.SetSizer(sizer)
-        #Notkun: m = saveuptoX(monthly,X)
-    #Fyrir: monthly,X>=0 rauntölur
-    #Eftir: m er fjöldi mánaða sem það tekur að safna upp X pening a reikning þ.a. það megi taka hann út strax.
+
+    def refreshList(self):
+        a = storage.loadSAccts()
+        dictLoansS = {}
+        for i in a:
+            dictLoansS[BeautifulSoup(i.n)]=str(i)
+        b = storage.loadLoans()
+        dictLoansL = {}
+        for i in b:
+            dictLoansL[BeautifulSoup(i.name)]=str(i)
+        populateComboBox(self)
     def calculate(self,event):
         name = self.combo_box_1.GetValue()
         savings = storage.loadSAccts()
@@ -60,19 +71,19 @@ class TabPanel(wx.Panel):
         #Eftir: m er fjöldi mánaða sem það tekur að safna upp X pening a reikning þ.a. það megi taka hann út strax.
         text = ""
         for i in savings:
-            if i.n == name:
+            if unicode(BeautifulSoup(i.n)) == name:
                 acct = i
                 val = acct.saveuptoX(float(monthly),float(X))
-                text = str(val)+ " er fjoldi manada sem tekur ad safna upp "+X+" pening \na reikning th.a. thad megi taka hann ut strax."
+                text = str(val)+ unicode(BeautifulSoup(" er fjöldi mánaða sem tekur að safna upp "))+X+unicode(BeautifulSoup(" pening \ná reikning þ.a. það megi taka hann út strax."))
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,text,pos=(15,10),size=(800,200))
             someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
-            someInfo.SetForegroundColour("red")
+            someInfo.SetForegroundColour("blue")
     
     def values(self,event):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
-                                 -1,dictLoans[self.combo_box_1.GetValue()],pos=(15,10),size=(800,200))
+                                 -1,dictLoans[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
         someInfo.SetForegroundColour("red")
    

@@ -1,22 +1,26 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+#ATTENTION! YOU NEED TO DOWNLOAD THE BEAUTIFULSOUP LIBRARY BEFORE RUNNING THIS CODE
+
 import wx
 import Loan
 import Savings
 import storage
 import Calculator
 import gettext
+import plot
+from bs4 import BeautifulSoup
 
 a = storage.loadSAccts()
 dictLoansS = {}
 for i in a:
-    dictLoansS[str(i.n)]=str(i)
+    dictLoansS[BeautifulSoup(i.n)]=str(i)
 
 
 b = storage.loadLoans()
 dictLoansL = {}
 for i in b:
-    dictLoansL[str(i.name)]=str(i)
+    dictLoansL[BeautifulSoup(i.name)]=str(i)
 
 
 class TabPanel(wx.Panel):
@@ -48,16 +52,11 @@ class TabPanel(wx.Panel):
         
         up = -57
 
-#Notkun: t = compareLS(l,s,monthly,M)
-#Fyrir: l er Loan hlutur, s er Savings hlutur, monthly>=0 rauntala, M>=0 heiltala
-#Eftir: t = l ef hagstæðara er fyrir notanda að greiða upphæð monthly inn á l í M mánuði, t = s annars
-#       'hagstæðara' telst vera meiri eignir að M mánuðum loknum.
-
         self.txt3 = wx.StaticText(self,-1,'Fjöldi mánuða',pos=(28,200+up))
         self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,220+up))
 
 
-        self.txt4 = wx.StaticText(self,-1,'Peningaupphæð',pos=(28,255+up))
+        self.txt4 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,255+up))
         self.inputTxt3 = wx.TextCtrl(self, -1, '' ,pos=(28,274+up))
         
         self.btn = wx.Button(self,label="Reikna!",pos=(28,330+up-16),size=(-1,-1))
@@ -67,46 +66,75 @@ class TabPanel(wx.Panel):
 
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
         
-        plot_icon = wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
-        plot = wx.StaticBitmap(self,-1,plot_icon,pos=(330,230))
+        self.plotBtn = wx.BitmapButton(self,-wx.ID_ANY,wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(325,230),style=wx.NO_BORDER)
+        self.plotBtn.Bind(wx.EVT_BUTTON,self.plot) 
+        self.plotBtn.SetBitmapHover(wx.Image('grafhover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
         
         self.Fit()
         
         self.SetSizer(sizer)
-    
+		
+    def plot(self,event):
+        nameS = BeautifulSoup(self.combo_box_1.GetValue())
+        nameL = BeautifulSoup(self.combo_box_2.GetValue())
+        monthly = self.inputTxt3.GetValue()
+        M = self.inputTxt2.GetValue()
+        for i in a:
+            if BeautifulSoup(i.n) == nameS:
+                for j in b:
+                    if BeautifulSoup(j.name) == nameL:
+                        plot.plotLS(j,i,int(monthly),int(M))
+
+    def refreshList(self):
+        a = storage.loadSAccts()
+        dictLoansS = {}
+        for i in a:
+            dictLoansS[BeautifulSoup(i.n)]=str(i)
+        b = storage.loadLoans()
+        dictLoansL = {}
+        for i in b:
+            dictLoansL[BeautifulSoup(i.name)]=str(i)
+        populateComboBoxLoans(self)
+        populateComboBoxSavings(self)
+
     def calculate(self,event):
-        nameS = self.combo_box_1.GetValue()
-        nameL = self.combo_box_2.GetValue()
-#Notkun: t = compareLS(l,s,monthly,M)
-#Fyrir: l er Loan hlutur, s er Savings hlutur, monthly>=0 rauntala, M>=0 heiltala
-#Eftir: t = l ef hagstæðara er fyrir notanda að greiða upphæð monthly inn á l í M mánuði, t = s annars
-#       'hagstæðara' telst vera meiri eignir að M mánuðum loknum.
+        nameS = BeautifulSoup(self.combo_box_1.GetValue())
+        nameL = BeautifulSoup(self.combo_box_2.GetValue())
         text = ""
         monthly = self.inputTxt3.GetValue()
         M = self.inputTxt2.GetValue()
         for i in a:
-            if i.n == nameS:
+            if BeautifulSoup(i.n) == nameS:
                 for j in b:
-                    if j.name == nameL:
+                    if BeautifulSoup(j.name) == nameL:
                         val = Calculator.compareLS(j, i,float(monthly), int(M))
                         if isinstance(val, Savings.Savings):
-                            text = "Hagstaeara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ i.n+" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
+                            text = BeautifulSoup(i.n)
                         else:
-                            text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ j.name +" i " + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"                       
+                            text = BeautifulSoup(j.name)
+                            #text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ BeautifulSoup(j.name).encode('ascii') +" i" + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
         if text != "":
-            someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,text,pos=(15,10),size=(800,200))
-            someInfo.SetFont(wx.Font(12, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
-            someInfo.SetForegroundColour("blue")
+				first= unicode(BeautifulSoup("Hagstæðara er fyrir notanda að greida upphæð "))
+				M1 = unicode(BeautifulSoup(M))
+				monthly1 = unicode(BeautifulSoup(monthly))
+				second = unicode(BeautifulSoup(" inn á "))
+				third = unicode(BeautifulSoup(" í "))
+				fourth = unicode(BeautifulSoup(" mánuði, \n\'hagstæðara\' telst vera meiri eignir að "))
+				fifth = unicode(BeautifulSoup(" mánuðum loknum"))
+				text = unicode(text)
+				someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,first+monthly1+second+text+third+M1+fourth+M1+fifth,pos=(15,10),size=(800,200))
+				someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+				someInfo.SetForegroundColour("blue")
     
     def valuesS(self,event):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
-                                 -1,dictLoansS[self.combo_box_1.GetValue()],pos=(15,10),size=(800,200))
+                                 -1,dictLoansS[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
         someInfo.SetForegroundColour("red")
     
     def valuesL(self,event):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
-                                 -1,dictLoansL[self.combo_box_2.GetValue()],pos=(15,10),size=(800,200))
+                                 -1,dictLoansL[BeautifulSoup(self.combo_box_2.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
         someInfo.SetForegroundColour("red")
         

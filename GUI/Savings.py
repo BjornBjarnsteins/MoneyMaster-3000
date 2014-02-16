@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import math
 import locale
@@ -156,3 +157,7 @@ class Savings:
         for i in prog:
             amount.append(sum(i))
         return [month, amount]
+		
+if __name__=="__main__":
+    reload(sys)
+    sys.setdefaultencoding("utf-8")

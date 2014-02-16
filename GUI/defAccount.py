@@ -81,6 +81,8 @@ class Frame(wx.Frame):
         
 #----------------------------------------------------------------------
 if __name__ == "__main__":
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
     gettext.install("app") # replace with the appropriate catalog name
     app = wx.PySimpleApp()
     frame = Frame()
