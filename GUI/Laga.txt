@@ -6,4 +6,6 @@ Binda function við 'Teikna Graf' takkann
 
 Reyna að komast hjá því að þurfa að restarta forritinu eftir að maður skilgreinir lán/sparnað áður en maður getur farið að reikna með þeim
 
+Virðist koma mörg eintök af listanum af sparnaðarreikningum/lánum í combo boxin
+
 Annars er held ég allt komið!!!!
