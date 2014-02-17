@@ -1,5 +1,2 @@
-e-1454-3.000000-14-True
-Ee-154-3.000000-14-True
-Saqssquatch-14544-3.000000-14-True
-Bílalán-23-131.000000-13154-True
-Kadam-3-91.000000-13-False
+Dæmi um lán-1200-12-12-False-
+Verdtryggt-100000-12.000000-12-True-

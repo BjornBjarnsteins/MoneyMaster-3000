@@ -22,7 +22,7 @@ def resetFile(filename):
 def storeLoan(l):
 	storage = open('loans.txt', 'a')
 	name = l.name.encode('cp1252')
-	storage.write('%s-%d-%f-%d-%s\n' % (name, l.amount, l.interest, l.m, l.dex)) 
+	storage.write('%s-%d-%f-%d-%s-\n' % (name, l.amount, l.interest, l.m, l.dex)) 
 
 # Notkun: storeAllLoans(l)
 # Fyrir:  l er listi af lanum
