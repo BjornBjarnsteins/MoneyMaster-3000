@@ -39,7 +39,7 @@ def loadLoans():
 	loans = []
 	for line in open('loans.txt'):
 		args = line.split('-')
-		loans = loans + [Loan.Loan(args[0], int(args[1]), float(args[2]), int(args[3]), args[4]==1)]
+		loans = loans + [Loan.Loan(args[0], int(args[1]), float(args[2]), int(args[3]), args[4]=='True')]
 	return loans
 
 
