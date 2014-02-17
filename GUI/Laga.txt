@@ -1,0 +1,9 @@
+Eitthvað hefur farið úrskeiðis því nú eru vextir 100 faldir, viljum birta þá eins og núna í 'Skoða' flipanum, en þetta skemmir útreikninga.
+
+Breyta upphafsskjánum, svartur bakgrunnur er ekki málið :)
+
+Binda function við 'Teikna Graf' takkann
+
+Reyna að komast hjá því að þurfa að restarta forritinu eftir að maður skilgreinir lán/sparnað áður en maður getur farið að reikna með þeim
+
+Annars er held ég allt komið!!!!
