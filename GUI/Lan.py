@@ -14,7 +14,12 @@ print a[0]
 dictLoans = {}
 index = 1
 for i in a:
-    dictLoans[index]=(str(i.name),str(i.amount),str(i.interest),str(i.m),str(i.dex))
+    vtr = ''
+    if i.dex:
+        vtr = 'Ja'
+    else:
+        vtr = 'Nei'
+    dictLoans[index]=(str(i.name),str(i.amount),str(i.interest),str(i.m),vtr)
     index += 1
         
 class TestListCtrl(wx.ListCtrl, listmix.ListCtrlAutoWidthMixin):
