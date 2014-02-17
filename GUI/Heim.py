@@ -22,7 +22,7 @@ class Heim(wx.Notebook):
         self.panel2.SetMinSize((900,1000))
         self.panel1.SetBackgroundColour('white')
         self.panel3 = wx.Panel(self,wx.ID_ANY)
-        self.panel3.SetBackgroundColour('black')
+        self.panel3.SetBackgroundColour('white')
 
         filename = "infl2.xls"
         book = xlrd.open_workbook(filename, formatting_info=1)
@@ -48,8 +48,8 @@ class Heim(wx.Notebook):
         piggyGraphic = wx.StaticBitmap(self.panel3,-1,piggy,pos=(214,152))
 
         self.AddPage(self.panel3,"Forsíða")
-        self.AddPage(self.panel2,  "Verðbólguþróun (tafla)")
-        self.AddPage(self.panel1, "Verðbólguþróun (graf)")
+        self.AddPage(self.panel2,  "Verðlagsþróun (tafla)")
+        self.AddPage(self.panel1, "Verðlagsþróun (graf)")
         
         self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.OnPageChanged)
         self.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGING, self.OnPageChanging)
