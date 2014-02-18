@@ -17,7 +17,7 @@ import gettext
 #icons tekið frá http://www.gentleface.com/free_icon_set.html
 
 #búið var til þetta app með http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ til hliðsjónar
-import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan,calcSavingsTime,calcDownPay,Heim
+import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan,calcSavingsTime,calcDownPay,Heim,calcBest
 
 #hjalparfall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
 def getNextImageID(count):
@@ -64,11 +64,11 @@ class TreeSidebar(wx.Treebook):
         imID +=1
         self.AddSubPage(Reikningar.TabPanel(self),"Reikninga",imageId=0)
         self.AddSubPage(Lan.TabPanel(self),"Lán",imageId=0)
-        self.AddPage(None,"Reiknivél                       ",imageId = imID)
+        self.AddPage(None,"Reiknivél                          ",imageId = imID)
         self.AddSubPage(calcSparnadur.TabPanel(self),"Sparnaðarmarkmið ",imageId=0)
         self.AddSubPage(calcSavingsTime.TabPanel(self),"Sparnaðartímabil",imageId=0)
         self.AddSubPage(calcDownPay.TabPanel(self),"Niðurgreiðslur lána",imageId=0)
-
+        self.AddSubPage(calcBest.TabPanel(self),"Besta sparnaðarleiðin",imageId=0)
         
         self.GetTreeCtrl().SetFont(wx.Font(10,family=wx.FONTFAMILY_SCRIPT, style=wx.FONTSTYLE_NORMAL, 
                                            weight=wx.NORMAL,encoding=wx.FONTENCODING_SYSTEM))
