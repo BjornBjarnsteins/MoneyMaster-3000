@@ -74,7 +74,7 @@ class TabPanel(wx.Panel):
                 acct = i
                 val = acct.saveuptoX(float(monthly),float(X))
                 amount = locale.currency(int(X), grouping=True)
-                text = str(val)+ unicode(BeautifulSoup(" er fjöldi mánaða sem tekur að safna upp "))+amount+unicode(BeautifulSoup("\ná reikning þ.a. það megi taka hann út strax."))
+                text = unicode(BeautifulSoup("Eftir "))+str(val)+ unicode(BeautifulSoup(" mánuði verður innistæða á reikningnum orðin meiri en \n"))+amount+unicode(BeautifulSoup(" og upphæðina má taka út strax út strax."))
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,text,pos=(15,10),size=(800,200))
