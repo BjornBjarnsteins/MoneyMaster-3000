@@ -129,14 +129,13 @@ class Savings:
 
 		total = self.a
 		n = int(math.ceil(self.b))
-		Y = X/math.pow(1+self.adjustedp,n)
-
-		m = 0
-		while(total < Y):
-			total = (total+monthly)*(1+self.adjustedp)
+		M = 0
+		m = -1
+		while(total < X):
 			m = m+1
-
-		return m+n
+			M = m+n
+			total = self.progression(monthly,m,m+n)[m+n][0]
+		return M
 		
 	# Notkun: a = plotSavings(payment, m, M)
 	# Fyrir:  payment, m og M eru jakvaedar heiltolur (eda 0)
