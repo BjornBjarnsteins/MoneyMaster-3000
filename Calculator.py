@@ -21,8 +21,8 @@ def compareSavings(s1, s2, monthly, m, M):
     x1 = s1.progression(monthly, m, M)
     x2 = s2.progression(monthly, m, M)
 
-    sum1 = sum(x1[M]) #stada + uppsafnadir vextir eftir M manudi
-    sum2 = sum(x2[M]) #stada + uppsafnadir vextir eftir M manudi.
+    sum1 = sum(x1[M])-sum(s1.progression(0,0,M)[M]) #stada + uppsafnadir vextir af monthly innlognunum eftir M manudi
+    sum2 = sum(x2[M])-sum(s2.progression(0,0,M)[M]) #stada + uppsafnadir vextir af monthly innlognunum eftir M manudi.
     if(sum1 > sum2):
         return s1
     else:
