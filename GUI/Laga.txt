@@ -2,7 +2,7 @@ Eitthvað hefur farið úrskeiðis því nú eru vextir 100 faldir, viljum birta þá ein
 
 Breyta upphafsskjánum, svartur bakgrunnur er ekki málið :)
 
-Binda function við 'Teikna Graf' takkann
+Laga vistun á reikningum, vextirnir 100 faldast
 
 Reyna að komast hjá því að þurfa að restarta forritinu eftir að maður skilgreinir lán/sparnað áður en maður getur farið að reikna með þeim
 

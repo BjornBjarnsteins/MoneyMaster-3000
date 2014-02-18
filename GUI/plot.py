@@ -42,7 +42,6 @@ def plotLS(L,S,monthly,m):
 
 	fig = figure(figsize=(20,5))
 	fig.canvas.set_window_title('Samanburdur')
-	#fig1.suptitle('Borgum aukalega inn a hofudstol lans')
 	p1 = fig.add_subplot(131)
 	
 	xlim(xmin=1)
@@ -51,9 +50,6 @@ def plotLS(L,S,monthly,m):
 	ylabel('Hofudstoll / Innistaeda')
 	title('Borgum aukalega inn a hofudstol lans')
 	
-	#fig2 = figure(2)
-	#fig2.canvas.set_window_title('Samanburdur 2')
-	#fig2.suptitle('Borgum aukalega inn a sparnadarreikning')
 	p2 = fig.add_subplot(132)
 	xlim(xmin=1)
 	xlim(xmax=L.m)
@@ -65,7 +61,7 @@ def plotLS(L,S,monthly,m):
 	#Case1: Borgum nidur lan:
 	Lx = L.datLoanDebt(monthly, m)
 	n = len(L.payProgression(monthly,m))
-	N = max(m-n-1,0)
+	N = max(m-n,0)
 	Sx = S.datSavings2(L.baseFee, monthly, n+1, N, L.m)
 
 	A1, = p1.plot(Lx[0],Lx[1], label='Lan')
@@ -79,7 +75,6 @@ def plotLS(L,S,monthly,m):
 	Sx = S.datSavings(monthly, m, n)
 	A2,= p2.plot(Lx[0],Lx[1])
 	B2,= p2.plot(Sx[0],Sx[1])
-	#m = p2.legend([A2, B2], ['Lan', 'Sparnadur'], loc=1)
 	
 	#Samanburdur a greidslubyrdi.
 	
