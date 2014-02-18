@@ -18,7 +18,7 @@ index = 1
 for i in a:
     j = ""
     if i.dex == True:
-        j = "Ja"
+        j = "Já"
     else:
         j = "Nei"
         
@@ -36,7 +36,7 @@ for i in a:
     else: 
         days = int(i.b*30)
         bound = str(days)+' dagar'
-    dictSavings[index]=(str(i.n),str(i.a),str(i.p),j,bound)
+    dictSavings[index]=(str(i.n),str(i.a),str(float(i.p)*100),j,bound)
     index += 1
         
 class TestListCtrl(wx.ListCtrl, listmix.ListCtrlAutoWidthMixin):
@@ -103,7 +103,7 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
         index = 1
         for i in a:
             if i.dex == 1:
-                j = "Ja"
+                j = "Já"
             else:
                 j = "Nei"
                 
@@ -121,7 +121,7 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
             else: 
                 days = int(i.b*30)
                 bound = str(days)+' dagar'
-            dictSavings[index]=(str(i.n),str(i.a),str(i.p),j,bound)
+            dictSavings[index]=(str(i.n),str(i.a),str(float(i.p)*100),j,bound)
             index += 1
         items = dictSavings.items()
         for key, data in items:

@@ -10,7 +10,6 @@ import gettext
 #þessi kóði er að hluta til copy pasteaður fra http://www.blog.pythonlibrary.org/2011/01/04/wxpython-wx-listctrl-tips-and-tricks/
 #eg var með þennan tutorial til hliðsjónar allan tímann
 a = storage.loadLoans()
-print a[0]
 dictLoans = {}
 index = 1
 for i in a:
@@ -86,7 +85,12 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
         dictLoans = {}
         index = 1
         for i in a:
-            dictLoans[index]=(str(i.name),str(i.amount),str(i.interest),str(i.m),str(i.dex))
+            vtr = ''
+            if i.dex:
+                vtr = 'Já'
+            else:
+                vtr = 'Nei'
+            dictLoans[index]=(str(i.name),str(i.amount),str(i.interest),str(i.m),vtr)
             index += 1
         items = dictLoans.items()
         for key, data in items:
