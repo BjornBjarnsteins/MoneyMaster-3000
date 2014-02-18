@@ -23,10 +23,10 @@ class Loan:
 	def __str__(self):
 		amount = locale.currency(self.amount, grouping = True)
 		if self.dex:
-			vtr = 'Ja'
+			vtr = 'Já'
 		else:
 			vtr = 'Nei'
-		return "Lan: %s \nHofudstoll: %s \nÁrsvextir: %0.2f \nLengd(manudir): %d \nVerdtryggt: %s" % (self.name, amount, self.interest, self.m, vtr)
+		return "Lán: %s \nHöfuðstóll: %s \nÁrsvextir: %0.2f %s \nLengd(mánuðir): %d \nVerðtryggt: %s" % (self.name, amount, self.interest,'%', self.m, vtr)
 	
 	# Notkun: p = progression(payment)
 	# Fyrir:  payment,M eru heilar tolur >= 0
@@ -66,11 +66,11 @@ class Loan:
 	def printProgression(self, payment, M):
 		prog = self.progression(payment, M)
 		amount = locale.currency(self.amount, grouping = True)
-		print 'Hofudstoll i upphafi: '+amount
+		print 'Höfuðstóll i upphafi: '+amount
 		for i in range(0,len(prog[0])):
 			pay = locale.currency(prog[0][i], grouping = True)
 			debt = locale.currency(prog[1][i], grouping = True)
-			print 'Manudur %d: \n Afborgun: %s Hofudstoll: %s' %(i+1, pay, debt)
+			print 'Mánuður %d: \n Afborgun: %s Höfuðstóll: %s' %(i+1, pay, debt)
 	
 	# Notkun: p = payProgression(payment,M)
 	# Fyrir:  payment,M eru heiltolur >= 0
