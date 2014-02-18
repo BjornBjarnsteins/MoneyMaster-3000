@@ -9,3 +9,32 @@ Reyna að komast hjá því að þurfa að restarta forritinu eftir að maður skilgreini
 Virðist koma mörg eintök af listanum af sparnaðarreikningum/lánum í combo boxin
 
 Annars er held ég allt komið!!!!
+
+
+
+
+MIKILVÆGT - TOP PRIORITY
+
+ÞURFUM AÐ BÆTA VIÐ BESTU SPARNAÐARLEIÐINNI! 
+Það kom skýrt fram í fyrirmælunum að forritið á að geta valið bestu sparnaðarleiðina úr fyrirfram 
+skilgreindum sparnaðarreikningum landsbanka (eða öllum sem eru í forritinu er líka í lagi)
+
+Þetta þarf helst að komast í lag í dag svo hægt sé að uppfæra testun o.þ.h.
+
+Það sem þarf að gera:
+
+Bæta við flipa í Reiknivélina. Svona á þetta að líta út
+
+
+Reiknivél > Besta sparnaðarleiðin.
+
+Tekur inn:
+
+'Sparnaður á mánuði:' monthly
+'Sparnaðartímabil:' m
+'Viðmiðunartími:' M
+
+kallar á Calculator.compareAllSavings(s, monthly, m, M) þar sem s er array af öllum reikningum í txt skránni okkar.
+
+Trausti þú ert augljóslega best kunnugur GUI-inu, heldurðu að þú gætir hent þessu saman einhvern tíma í dag? Það væri frábært.
+-Andrea
