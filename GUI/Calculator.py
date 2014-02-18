@@ -56,13 +56,13 @@ def compareLS(l,s, monthly, m):
 
     #Case 2: Borgum inn a lan en ekki sparnad.
     #Tap2 = vextirnir sem safnast upp yfir lanstimann.
-    #Grodi2 = §odi af tvi ad borga manadarlegt framlag inn a sparnadarreikning af tvi loknu ad borga nidur lan
+    #Grodi2 = Agodi af tvi ad borga manadarlegt framlag inn a sparnadarreikning af tvi loknu ad borga nidur lan
     #       + agodi af tvi borga hefdbundna afborgun af lani inn a sparnadarreikning uns lanstima likur.
     T = M-len(l.payProgression(monthly,m))
-    t = max(m-T,0)
+    t = max(m-len(l.payProgression(monthly,m)),0)
     tap2 = -l.totInterest(monthly,m)
-    grodi2 = sum(s.progression(monthly, t, T)[T])-sum(s.progression(0,0,T)[T])-monthly*t
-    grodi2 += sum(s.progression(l.baseFee, T, T)[T])-sum(s.progression(0,0,T)[T])-l.baseFee*T
+    grodi2 = sum(s.progression(monthly, t, T)[T])-sum(s.progression(0,0,T)[T])-monthly*m
+    grodi2 += sum(s.progression(l.baseFee, T, T)[T])-sum(s.progression(0,0,T)[T])
     netto2 = grodi2+tap2
 
     if(netto1 > netto2):
