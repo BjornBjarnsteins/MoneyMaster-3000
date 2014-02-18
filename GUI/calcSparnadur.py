@@ -61,6 +61,8 @@ class TabPanel(wx.Panel):
             dictSS[BeautifulSoup(i.n)]=str(i)
         populateComboBox(self)
     def calculate(self,event):
+        for child in self.GetParent().GetParent().GetParent().bottomwindow.GetChildren():
+            child.Destroy()
         name = self.combo_box_1.GetValue()
         savings = storage.loadSAccts()
         monthly = self.inputTxt2.GetValue()
