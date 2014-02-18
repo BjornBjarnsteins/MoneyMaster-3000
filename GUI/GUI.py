@@ -17,7 +17,7 @@ import gettext
 #icons tekið frá http://www.gentleface.com/free_icon_set.html
 
 #búið var til þetta app með http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/ til hliðsjónar
-import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcLan,calcSavingsTime,calcDownPay,Heim,calcBest
+import defAccount, defLoan,Lan,Reikningar,calcSparnadur,calcSavingsTime,calcDownPay,Heim,calcBest
 
 #hjalparfall copy-pasteað frá http://www.blog.pythonlibrary.org/2009/12/03/the-book-controls-of-wxpython-part-1-of-2/
 def getNextImageID(count):
