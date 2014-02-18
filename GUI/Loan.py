@@ -99,8 +99,8 @@ class Loan:
 
 
 	# Notkun: a = plotLoanDebt(payment, M)
-	# Fyrir:  payment og M eru jakvædar heiltolur (eda 0)
-	# Eftir:  a[1][n] er stada hofudstols a manudi a[0][n] m.v. payment aukaframlag næstu M manudina
+	# Fyrir:  payment og M eru jakvaedar heiltolur (eda 0)
+	# Eftir:  a[1][n] er stada hofudstols a manudi a[0][n] m.v. payment aukaframlag naestu M manudina
 	def datLoanDebt(self, payment, M):
 		month = range(1,self.m+1)
 		debt = self.debtProgression(payment,M)[1:]
@@ -110,15 +110,15 @@ class Loan:
 		while len(interest)<len(month):
 			interest.append(0.0)
 		data = [ debt[i] + interest[i] for i in range(len(month))]
-		return [month, debt]
+		return [month, data]
 	
 	
 	# Notkun: a = plotLoanPay(payment, M)
-	# Fyrir:  payment og M eru jakvædar heiltolur (eda 0)
-	# Eftir:  a[1][n] er greidslubyrdin a manudi a[0][n] m.v. payment aukaframlag næstu M manudina
+	# Fyrir:  payment og M eru jakvaedar heiltolur (eda 0)
+	# Eftir:  a[1][n] er greidslubyrdin a manudi a[0][n] m.v. payment aukaframlag naestu M manudina
 	def datLoanPay(self, payment, M):
 		month = range(1,self.m+1)
-		pay = self.payProgression(payment,M)
+		pay = self.payProgression(payment,M)[:self.m]
 		while len(pay)<len(month):
 			pay.append(0.0)
 		return [month, pay]
