@@ -66,8 +66,8 @@ class TabPanel(wx.Panel):
         name = self.combo_box_1.GetValue()
         savings = storage.loadSAccts()
         text = ""
-        monthly = self.inputTxt2.GetValue()
-        M = self.inputTxt1.GetValue()
+        monthly = self.inputTxt1.GetValue()
+        M = self.inputTxt2.GetValue()
         for i in savings:
             if unicode(BeautifulSoup(i.n)) == name:
                 acct = i
