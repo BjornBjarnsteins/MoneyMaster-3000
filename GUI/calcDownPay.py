@@ -133,7 +133,7 @@ class TabPanel(wx.Panel):
                             text = BeautifulSoup(j.name)
                             #text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ BeautifulSoup(j.name).encode('ascii') +" i" + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
         if text != "":
-				first= unicode(BeautifulSoup("Hagstæðara er fyrir notanda að greiða upphæð "))
+				first= unicode(BeautifulSoup("Hagstæðara er að greiða upphæð "))
 				M1 = unicode(BeautifulSoup(M))
 				amount = locale.currency(int(monthly), grouping = True)
 				monthly1 = unicode(BeautifulSoup(amount))

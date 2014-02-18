@@ -71,6 +71,7 @@ class TabPanel(wx.Panel):
         for i in savings:
             if unicode(BeautifulSoup(i.n)) == name:
                 acct = i
+                val = acct.saveforM(float(monthly),int(M))
                 amount = locale.currency(val, grouping = True)
                 text = amount+ unicode(BeautifulSoup(" er sú upphæð sem tekist hefur að safna á "))+ self.inputTxt2.GetValue()+unicode(BeautifulSoup(" mánuðum \nog má taka út strax."))
         if text != "":
