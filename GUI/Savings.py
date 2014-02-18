@@ -31,7 +31,7 @@ class Savings:
 	def __str__(self):
 
 		if self.dex:
-			indexed = 'Ja'
+			indexed = 'Já'
 		else:
 			indexed = 'Nei'
 
@@ -43,18 +43,18 @@ class Savings:
 			rest = self.b-years*12
 			months = int(math.floor(rest))
 			days = int((rest-months)*30)
-			bound = '%d ar, %d manudir, %d dagar' %(years, months, days)
+			bound = '%d ár, %d mánuğir, %d dagar' %(years, months, days)
 		elif(math.floor(self.b) != 0):
 			months = int(math.floor(self.b))
 			days = int((self.b-months)*30)
-			bound = '%d manudir, %d dagar' %(months, days)
+			bound = '%d mánuğir, %d dagar' %(months, days)
 		else: 
 			days = int(self.b*30)
 			bound = str(days)+' dagar'
 		
 		amount = locale.currency(self.a, grouping = True)
 		
-		return 'Sparnadarreikningur: %s \nStada: %s \nÁrsvextir: %0.2f%s \nVerdtrygging: %s \nBinditimi: %s' %(self.n, amount, interest,'%', indexed, bound)
+		return 'Sparnağarreikningur: %s \nStağa: %s \nÁrsvextir: %0.2f%s \nVerğtrygging: %s \nBinditími: %s' %(self.n, amount, interest,'%', indexed, bound)
 
 	#Notkun: data = progression(monthly,M)
 	#Fyrir: monthly>=0 rauntala, M>0 heiltala G.r.f. ad tad se januar

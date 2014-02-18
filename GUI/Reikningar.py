@@ -28,11 +28,11 @@ for i in a:
         rest = i.b-years*12
         months = int(math.floor(rest))
         days = int((rest-months)*30)
-        bound = '%d ar, %d manuðir, %d dagar' %(years, months, days)
+        bound = '%d ár, %d mánuðir, %d dagar' %(years, months, days)
     elif(math.floor(i.b) != 0):
         months = int(math.floor(i.b))
         days = int((i.b-months)*30)
-        bound = '%d manudir, %d dagar' %(months, days)
+        bound = '%d mánuðir, %d dagar' %(months, days)
     else: 
         days = int(i.b*30)
         bound = str(days)+' dagar'
@@ -113,11 +113,11 @@ class TabPanel(wx.Panel, listmix.ColumnSorterMixin):
                 rest = i.b-years*12
                 months = int(math.floor(rest))
                 days = int((rest-months)*30)
-                bound = '%d ar, %d manuðir, %d dagar' %(years, months, days)
+                bound = '%d ár, %d mánuðir, %d dagar' %(years, months, days)
             elif(math.floor(i.b) != 0):
                 months = int(math.floor(i.b))
                 days = int((i.b-months)*30)
-                bound = '%d manudir, %d dagar' %(months, days)
+                bound = '%d mánuðir, %d dagar' %(months, days)
             else: 
                 days = int(i.b*30)
                 bound = str(days)+' dagar'
