@@ -45,9 +45,6 @@ class TabPanel(wx.Panel):
         self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
         
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
-        self.plotBtn = wx.BitmapButton(self,-wx.ID_ANY,wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(325,230),style=wx.NO_BORDER)
-        self.plotBtn.Bind(wx.EVT_BUTTON,self.calculate) 
-        self.plotBtn.SetBitmapHover(wx.Image('grafhover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
         
         self.Fit()
         
@@ -58,10 +55,6 @@ class TabPanel(wx.Panel):
         dictLoansS = {}
         for i in a:
             dictLoansS[BeautifulSoup(i.n)]=str(i)
-        b = storage.loadLoans()
-        dictLoansL = {}
-        for i in b:
-            dictLoansL[BeautifulSoup(i.name)]=str(i)
         populateComboBox(self)
     def calculate(self,event):
         name = self.combo_box_1.GetValue()
@@ -90,6 +83,9 @@ class TabPanel(wx.Panel):
         
 def populateComboBox(self):
     a = storage.loadSAccts()
+    self.combo_box_1.Clear()
+    self.combo_box_1.Insert("Velja reikning",0)
+    self.combo_box_1.SetSelection(0)
     k = 1
     for i in a:
         self.combo_box_1.Insert(i.n,k)

@@ -140,6 +140,9 @@ class TabPanel(wx.Panel):
         
 def populateComboBoxSavings(self):
     a = storage.loadSAccts()
+    self.combo_box_1.Clear()
+    self.combo_box_1.Insert("Velja reikning",0)
+    self.combo_box_1.SetSelection(0)
     k = 1
     for i in a:
         self.combo_box_1.Insert(i.n,k)
@@ -147,6 +150,9 @@ def populateComboBoxSavings(self):
 
 def populateComboBoxLoans(self):
     b = storage.loadLoans()
+    self.combo_box_2.Clear()
+    self.combo_box_2.Insert("Velja lán",0)
+    self.combo_box_2.SetSelection(0)
     k = 1
     for i in b:
         self.combo_box_2.Insert(i.name,k)
