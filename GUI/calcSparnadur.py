@@ -9,9 +9,9 @@ import storage
 from bs4 import BeautifulSoup
 import gettext
 a = storage.loadSAccts()
-dictLoans = {}
+dictS = {}
 for i in a:
-    dictLoans[BeautifulSoup(i.n)]=str(i)
+    dictS[BeautifulSoup(i.n)]=str(i)
     
 class TabPanel(wx.Panel):
     def __init__(self, parent):
@@ -54,9 +54,9 @@ class TabPanel(wx.Panel):
 
     def refreshList(self):
         a = storage.loadSAccts()
-        dictLoansS = {}
+        dictSS = {}
         for i in a:
-            dictLoansS[BeautifulSoup(i.n)]=str(i)
+            dictSS[BeautifulSoup(i.n)]=str(i)
         populateComboBox(self)
     def calculate(self,event):
         name = self.combo_box_1.GetValue()
@@ -85,8 +85,11 @@ class TabPanel(wx.Panel):
         dc.GradientFillLinear((x, y+h*0.66-1, w, h/3), 'white', self.color,nDirection = wx.NORTH)
 		
     def values(self,event):
+        a = storage.loadSAccts()
+        if dictS.get(BeautifulSoup(a[-1].n))==None:
+            dictS[BeautifulSoup(a[-1].n)]=str(a[-1])
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
-                                 -1,dictLoans[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))
+                                 -1,dictS[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
         someInfo.SetForegroundColour("red")
    

@@ -108,6 +108,8 @@ class TabPanel(wx.Panel):
         dc.GradientFillLinear((x, y+h*0.66-1, w, h/3), 'white', self.color,nDirection = wx.NORTH)
 		
     def calculate(self,event):
+        a = storage.loadSAccts()
+        b = storage.loadLoans()
         nameS = BeautifulSoup(self.combo_box_1.GetValue())
         nameL = BeautifulSoup(self.combo_box_2.GetValue())
         text = ""
@@ -137,12 +139,18 @@ class TabPanel(wx.Panel):
 				someInfo.SetForegroundColour("blue")
     
     def valuesS(self,event):
+        a = storage.loadSAccts()
+        if dictLoansS.get(BeautifulSoup(a[-1].n))==None:
+            dictLoansS[BeautifulSoup(a[-1].n)]=str(a[-1])
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,dictLoansS[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
         someInfo.SetForegroundColour("red")
     
     def valuesL(self,event):
+        b = storage.loadLoans()
+        if dictLoansL.get(BeautifulSoup(b[-1].name))==None:
+            dictLoansL[BeautifulSoup(b[-1].name)]=str(b[-1])
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,dictLoansL[BeautifulSoup(self.combo_box_2.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
