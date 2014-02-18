@@ -45,7 +45,9 @@ class TabPanel(wx.Panel):
         self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
         
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
-        
+        self.color=self.GetBackgroundColour()
+
+        self.Bind(wx.EVT_PAINT, self.on_paint)
         self.Fit()
         
         self.SetSizer(sizer)
@@ -73,7 +75,15 @@ class TabPanel(wx.Panel):
                                  -1,text,pos=(15,10),size=(800,200))
             someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
             someInfo.SetForegroundColour("blue")
-    
+			
+    def on_paint(self, event):
+        # establish the painting canvas
+        dc = wx.PaintDC(self)
+        x = 0
+        y = 0
+        w, h = self.GetSize()
+        dc.GradientFillLinear((x, y+h*0.66-1, w, h/3), 'white', self.color,nDirection = wx.NORTH)
+		
     def values(self,event):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,dictLoans[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))

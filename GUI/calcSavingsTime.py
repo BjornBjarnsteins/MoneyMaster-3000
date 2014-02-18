@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import wx
+import math
 import Loan
 import Savings
 import storage
@@ -43,6 +44,9 @@ class TabPanel(wx.Panel):
         self.btn = wx.Button(self,label="Reikna upphæð",pos=(28,260+up-4),size=(-1,-1))
         
         self.combo_box_1.Bind(wx.EVT_TEXT,self.values)
+        self.color=self.GetBackgroundColour()
+
+        self.Bind(wx.EVT_PAINT, self.on_paint)
         
         self.btn.Bind(wx.EVT_BUTTON, self.calculate)
         self.Fit()
@@ -73,7 +77,13 @@ class TabPanel(wx.Panel):
             someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
             someInfo.SetForegroundColour("blue")
     
-
+    def on_paint(self, event):
+        # establish the painting canvas
+        dc = wx.PaintDC(self)
+        x = 0
+        y = 0
+        w, h = self.GetSize()
+        dc.GradientFillLinear((x, y+h*0.66-1, w, h/3), 'white', self.color,nDirection = wx.NORTH)
 			
     def values(self,event):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
