@@ -63,7 +63,7 @@ def compareLS(l,s, monthly, m):
     T = M-len(l.payProgression(monthly,m))
     t = max(m-len(l.payProgression(monthly,m)),0)
     tap2 = -l.totInterest(monthly,m)
-    grodi2 = sum(s.progression(monthly, t, T)[T])-sum(s.progression(0,0,T)[T])-monthly*m
+    grodi2 = sum(s.progression(monthly, t, T)[T])-sum(s.progression(0,0,T)[T])-monthly*t
     grodi2 += sum(s.progression(l.baseFee, T, T)[T])-sum(s.progression(0,0,T)[T])
     netto2 = grodi2+tap2
 
