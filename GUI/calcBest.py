@@ -56,8 +56,8 @@ class TabPanel(wx.Panel):
                                  -1,text,pos=(15,10),size=(800,20))
         someInfo2 = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,str(S),pos=(15,29),size=(800,200))
-        someInfo1.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.BOLD, 0, "PT Sans"))
-        someInfo2.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
+        someInfo1.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.BOLD))
+        someInfo2.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.NORMAL))
         someInfo1.SetForegroundColour("red")
         someInfo2.SetForegroundColour("blue")
 
