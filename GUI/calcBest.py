@@ -25,16 +25,16 @@ class TabPanel(wx.Panel):
 
         self.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
 
-        up = -66
+        up = -62
         self.txt2 = wx.StaticText(self,-1,'Sparnaður á mánuði',pos=(28,125+up))
         self.inputTxt1 = wx.TextCtrl(self, -1, '',pos=(28,150+up))
 
-        self.txt3 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,190+up))
-        self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,210+up))
-        self.txt4 = wx.StaticText(self,-1,'Viðmiðunartími',pos=(28,260+up-4))
-        self.inputTxt3 = wx.TextCtrl(self, -1, '' ,pos=(28,280+up-4))
+        self.txt3 = wx.StaticText(self,-1,'Sparnaðartímabil',pos=(28,183+up))
+        self.inputTxt2 = wx.TextCtrl(self, -1, '' ,pos=(28,203+up))
+        self.txt4 = wx.StaticText(self,-1,'Viðmiðunartími',pos=(28,242+up-4))
+        self.inputTxt3 = wx.TextCtrl(self, -1, '' ,pos=(28,263+up-4))
 
-        self.btn = wx.Button(self,label="Reikna!",pos=(28,330+up-4),size=(-1,-1))
+        self.btn = wx.Button(self,label="Reikna!",pos=(28,300+up-4),size=(-1,-1))
         
         self.color=self.GetBackgroundColour()
 
