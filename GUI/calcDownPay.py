@@ -69,7 +69,9 @@ class TabPanel(wx.Panel):
         self.plotBtn = wx.BitmapButton(self,-wx.ID_ANY,wx.Image('graf.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap(),pos=(325,230),style=wx.NO_BORDER)
         self.plotBtn.Bind(wx.EVT_BUTTON,self.plot) 
         self.plotBtn.SetBitmapHover(wx.Image('grafhover.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap())
-        
+        self.color=self.GetBackgroundColour()
+
+        self.Bind(wx.EVT_PAINT, self.on_paint)        
         self.Fit()
         
         self.SetSizer(sizer)
@@ -97,6 +99,14 @@ class TabPanel(wx.Panel):
         populateComboBoxLoans(self)
         populateComboBoxSavings(self)
 
+    def on_paint(self, event):
+        # establish the painting canvas
+        dc = wx.PaintDC(self)
+        x = 0
+        y = 0
+        w, h = self.GetSize()
+        dc.GradientFillLinear((x, y+h*0.66-1, w, h/3), 'white', self.color,nDirection = wx.NORTH)
+		
     def calculate(self,event):
         nameS = BeautifulSoup(self.combo_box_1.GetValue())
         nameL = BeautifulSoup(self.combo_box_2.GetValue())
