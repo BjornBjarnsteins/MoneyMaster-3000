@@ -40,7 +40,7 @@ def plotPayProg(L,monthly, m):
 #                  Midast vid ad greitt se aukalega upphaed monthly inn a lan i m manudi annarsvegar en ekkert aukalega hinsvegar.
 def plotLS(L,S,monthly,m):
 
-     fig = figure(figsize=(20,5))
+     fig = figure(figsize=(22,5))
      fig.canvas.set_window_title('Samanburdur')
      p1 = fig.add_subplot(131)
      
@@ -67,7 +67,7 @@ def plotLS(L,S,monthly,m):
      A1, = p1.plot(Lx[0],Lx[1], label='Lan')
      B1, = p1.plot(Sx[0],Sx[1], label='Sparnadur')
 
-     l = p1.legend([A1, B1], ['Lan', 'Sparnadur'], bbox_to_anchor=(-0.1,1))
+     l = p1.legend([A1, B1], ['Lan', 'Sparnadur'], bbox_to_anchor=(-0.15,1))
      
      #Case2: Borgum inn a sparnadarreikning.
      Lx = L.datLoanDebt(0,m)
