@@ -58,7 +58,7 @@ class TabPanel(wx.Panel):
                                  -1,str(S),pos=(15,29),size=(800,200))
         someInfo1.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.BOLD))
         someInfo2.SetFont(wx.Font(11, wx.SWISS, wx.NORMAL, wx.NORMAL))
-        someInfo1.SetForegroundColour("red")
+        someInfo1.SetForegroundColour("black")
         someInfo2.SetForegroundColour("blue")
 
     

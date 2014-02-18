@@ -145,7 +145,7 @@ class TabPanel(wx.Panel):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,dictLoansS[BeautifulSoup(self.combo_box_1.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
-        someInfo.SetForegroundColour("red")
+        someInfo.SetForegroundColour("black")
     
     def valuesL(self,event):
         b = storage.loadLoans()
@@ -154,7 +154,7 @@ class TabPanel(wx.Panel):
         someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,dictLoansL[BeautifulSoup(self.combo_box_2.GetValue())],pos=(15,10),size=(800,200))
         someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
-        someInfo.SetForegroundColour("red")
+        someInfo.SetForegroundColour("black")
         
 def populateComboBoxSavings(self):
     a = storage.loadSAccts()
