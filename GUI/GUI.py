@@ -106,7 +106,7 @@ class TreeSidebar(wx.Treebook):
         old = event.GetOldSelection()
         new = event.GetSelection()
         sel = self.GetSelection()
-        if new == 8:
+        if new == 8 or new == 7:
             self.GetPage(8).refreshList()
         if new == 9:
             self.GetPage(9).refreshList()

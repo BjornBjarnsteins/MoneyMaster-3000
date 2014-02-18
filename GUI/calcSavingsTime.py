@@ -48,14 +48,13 @@ class TabPanel(wx.Panel):
         self.Fit()
         
         self.SetSizer(sizer)
-    def plot(self,event):
-        print "right"
-		
+
     def refreshList(self):
 		a = storage.loadSAccts()
 		dictLoansS = {}
 		for i in a:
 			dictLoansS[BeautifulSoup(i.n)]=str(i)
+		populateComboBox(self)
 		
     def calculate(self,event):
         name = self.combo_box_1.GetValue()
