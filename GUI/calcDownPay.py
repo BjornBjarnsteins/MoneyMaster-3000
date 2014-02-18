@@ -77,6 +77,9 @@ class TabPanel(wx.Panel):
         self.SetSizer(sizer)
 		
     def plot(self,event):
+        a = storage.loadSAccts()
+        b = storage.loadLoans()
+
         nameS = BeautifulSoup(self.combo_box_1.GetValue())
         nameL = BeautifulSoup(self.combo_box_2.GetValue())
         monthly = self.inputTxt3.GetValue()
