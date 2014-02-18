@@ -10,6 +10,8 @@ import Calculator
 import gettext
 import plot
 from bs4 import BeautifulSoup
+import locale
+locale.setlocale( locale.LC_ALL, 'icelandic')
 
 a = storage.loadSAccts()
 dictLoansS = {}
@@ -129,15 +131,15 @@ class TabPanel(wx.Panel):
                             text = BeautifulSoup(j.name)
                             #text = "Hagstaedara er fyrir notanda ad greida upphaed \n" + monthly + " inn a "+ BeautifulSoup(j.name).encode('ascii') +" i" + M +" manudi,\n\'hagstaedara\' telst vera meiri eignir ad "+M + " manudum loknum"
         if text != "":
-				first= unicode(BeautifulSoup("Hagstæðara er fyrir notanda að greida upphæð "))
+				first= unicode(BeautifulSoup("Hagstæðara er fyrir notanda að greiða upphæð "))
 				M1 = unicode(BeautifulSoup(M))
-				monthly1 = unicode(BeautifulSoup(monthly))
-				second = unicode(BeautifulSoup(" inn á "))
+				amount = locale.currency(int(monthly), grouping = True)
+				monthly1 = unicode(BeautifulSoup(amount))
+				second = unicode(BeautifulSoup("\ninn á "))
 				third = unicode(BeautifulSoup(" í "))
-				fourth = unicode(BeautifulSoup(" mánuði, \n\'hagstæðara\' telst vera meiri eignir að "))
-				fifth = unicode(BeautifulSoup(" mánuðum loknum"))
+				fourth = unicode(BeautifulSoup(" mánuði."))
 				text = unicode(text)
-				someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,first+monthly1+second+text+third+M1+fourth+M1+fifth,pos=(15,10),size=(800,200))
+				someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,-1,first+monthly1+second+text+third+M1+fourth,pos=(15,10),size=(800,200))
 				someInfo.SetFont(wx.Font(14, wx.SWISS, wx.NORMAL, wx.NORMAL, 0, "PT Sans"))
 				someInfo.SetForegroundColour("blue")
     

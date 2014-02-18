@@ -5,9 +5,11 @@ import math
 import Loan
 import Savings
 import storage
+import locale
 from bs4 import BeautifulSoup
 #ATTENTION! YOU NEED TO DOWNLOAD THE BEAUTIFULSOUP LIBRARY BEFORE RUNNING THIS CODE
 import gettext
+locale.setlocale( locale.LC_ALL, 'icelandic')
 a = storage.loadSAccts()
 dictS = {}
 for i in a:
@@ -69,8 +71,8 @@ class TabPanel(wx.Panel):
         for i in savings:
             if unicode(BeautifulSoup(i.n)) == name:
                 acct = i
-                val = acct.saveforM(float(monthly),int(M))
-                text = str(val)+ unicode(BeautifulSoup(" er upphæð sem tekist hefur að safna á "))+ self.inputTxt2.GetValue()+unicode(BeautifulSoup(" mánuðum \nmeð "))+monthly + unicode(BeautifulSoup(" sparnaði og má taka út strax"))
+                amount = locale.currency(val, grouping = True)
+                text = amount+ unicode(BeautifulSoup(" er sú upphæð sem tekist hefur að safna á "))+ self.inputTxt2.GetValue()+unicode(BeautifulSoup(" mánuðum \nog má taka út strax."))
         if text != "":
             someInfo = wx.StaticText(self.GetParent().GetParent().GetParent().bottomwindow,
                                  -1,text,pos=(15,10),size=(800,200))
