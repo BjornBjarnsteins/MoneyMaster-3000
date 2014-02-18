@@ -20,9 +20,11 @@ def compareLoans(L1, L2, payment, m):
 def compareSavings(s1, s2, monthly, m, M):
     x1 = s1.progression(monthly, m, M)
     x2 = s2.progression(monthly, m, M)
-
-    sum1 = sum(x1[M]) #stada + uppsafnadir vextir eftir M manudi
-    sum2 = sum(x2[M]) #stada + uppsafnadir vextir eftir M manudi.
+	c1 = s1.progression(0, 0, M)
+	c2 = s2.progression(0, 0, M)
+	
+    sum1 = sum(x1[M])-sum(c1[M]) #stada + uppsafnadir vextir eftir M manudi
+    sum2 = sum(x2[M])-sum(c2[M]) #stada + uppsafnadir vextir eftir M manudi.
     if(sum1 > sum2):
         return s1
     else:
