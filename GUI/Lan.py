@@ -15,7 +15,7 @@ index = 1
 for i in a:
     vtr = ''
     if i.dex:
-        vtr = 'Ja'
+        vtr = 'Já'
     else:
         vtr = 'Nei'
     dictLoans[index]=(str(i.name),str(i.amount),str(i.interest),str(i.m),vtr)
