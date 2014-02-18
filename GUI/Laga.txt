@@ -1,6 +1,4 @@
-Reyna að komast hjá því að þurfa að restarta forritinu eftir að maður skilgreinir lán/sparnað áður en maður getur farið að reikna með þeim
-
-
+Kemur villa þegar maður reynir að velja nýskilgreindan reikning/lán í reiknivélunum (KeyError)
 
 MIKILVÆGT - TOP PRIORITY
 
