@@ -46,6 +46,8 @@ class TabPanel(wx.Panel):
         self.SetSizer(sizer)
 
     def calculate(self,event):
+        for child in self.GetParent().GetParent().GetParent().bottomwindow.GetChildren():
+            child.Destroy()
         savings = storage.loadSAccts()
         text = "Hagstæðasti sparnaðarreikningur af öllum reikningum:\n"
         monthly = self.inputTxt1.GetValue()

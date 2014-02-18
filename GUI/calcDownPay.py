@@ -113,6 +113,8 @@ class TabPanel(wx.Panel):
         dc.GradientFillLinear((x, y+h*0.66-1, w, h/3), 'white', self.color,nDirection = wx.NORTH)
 		
     def calculate(self,event):
+        for child in self.GetParent().GetParent().GetParent().bottomwindow.GetChildren():
+            child.Destroy()
         a = storage.loadSAccts()
         b = storage.loadLoans()
         nameS = BeautifulSoup(self.combo_box_1.GetValue())
