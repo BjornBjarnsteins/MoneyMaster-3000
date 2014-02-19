@@ -44,8 +44,8 @@ class Heim(wx.Notebook):
         graph = wx.Image('inflationgraph.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
         graph1 = wx.StaticBitmap(self.panel1,-1,graph,pos=(56,43))
 
-        piggy = wx.Image('images/piggy.ico',wx.BITMAP_TYPE_ICO).ConvertToBitmap()
-        piggyGraphic = wx.StaticBitmap(self.panel3,-1,piggy,pos=(214,152))
+        front = wx.Image('front.png',wx.BITMAP_TYPE_PNG).ConvertToBitmap()
+        frontGraphic = wx.StaticBitmap(self.panel3,-1,front,pos=(0,0))
 
         self.AddPage(self.panel3,"Forsíða")
         self.AddPage(self.panel2,  "Verðlagsþróun (tafla)")
