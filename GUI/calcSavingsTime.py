@@ -63,6 +63,8 @@ class TabPanel(wx.Panel):
 		populateComboBox(self)
 		
     def calculate(self,event):
+        for child in self.GetParent().GetParent().GetParent().bottomwindow.GetChildren():
+            child.Destroy()
         name = self.combo_box_1.GetValue()
         savings = storage.loadSAccts()
         text = ""
