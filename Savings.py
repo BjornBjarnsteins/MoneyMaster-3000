@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import locale
+import storage
 locale.setlocale( locale.LC_ALL, 'icelandic')
 
 class Savings:
@@ -14,8 +15,8 @@ class Savings:
         self.p = interest/100.0
         self.dex = index
         self.b = bound
-        self.influx = 0.0435  #Medalverdbolga 2011-2013
-        self.minflux = 0.0435/12.0
+        self.influx = storage.getInflation()/100.0
+        self.minflux = self.influx/12.0
         self.mrates = self.p/12.0 #manadarlegir vextir reiknadir ut fra arsvoxtum
 
         if(index):
