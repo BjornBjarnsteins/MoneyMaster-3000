@@ -95,7 +95,7 @@ class Loan:
 	# Eftir:  i eru heildarvextir af laninu  kronum eftir M manudi m.v. ad greiddar seu payment auka
 	#         kronur inn a hofudstol fyrstu m manudina. (t.e. vextir fyrstu M manuda laggdir saman)
 	def interestM(self, payment, m, M):
-		return round(sum(self.progression(payment,M)[2][:M]))
+		return round(sum(self.progression(payment,m)[2][:M]))
 
 
 	# Notkun: a = plotLoanDebt(payment, M)
